@@ -14,6 +14,9 @@
         "packages/*"
       ]
     },
+    "dependencies": {
+      "@monorepo/test-base": "*"
+    },
     "devDependencies": {
       "@monorepo/eslint-config-node": "*",
       "jest": "^26.1.0"
