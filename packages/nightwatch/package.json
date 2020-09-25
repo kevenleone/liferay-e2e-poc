@@ -1,0 +1,13 @@
+{
+  "name": "nightwatch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "geckodriver": "^1.20.0",
+    "nightwatch": "^1.4.3"
+  },
+  "scripts": {
+    "test": "./node_modules/nightwatch/bin/nightwatch index.js"
+  }
+}
