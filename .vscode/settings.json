@@ -1,3 +1,11 @@
 {
-    "eslint.workingDirectories": ["./packages/backend", "./packages/frontend", "./packages/eslint-config-node"]
+    "eslint.workingDirectories": [
+        "./packages/cypress", 
+        "./packages/i18n", 
+        "./packages/nightwatch", 
+        "./packages/taiko", 
+        "./packages/test-base", 
+        "./packages/test-cafe", 
+        "./packages/eslint-config-node"
+    ]
 }
