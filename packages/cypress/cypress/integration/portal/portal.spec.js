@@ -1,41 +1,31 @@
 /// <reference types="cypress" />
 
 const { constants, selectors } = require('@monorepo/test-base')
-const { homePage, login: { emailInput, loginButton, loginLink, passwordInput } } = selectors
-const { credentials: { email, password }, modules, portalURL } = constants
-
-const viewPorts = [
-  'macbook-15',
-  'macbook-13',
-  'macbook-11',
-  'ipad-2',
-  'iphone-xr'
-]
+const {
+  homePage,
+  login: { emailInput, loginButton, loginLink, passwordInput },
+  simulator: simulatorSelector
+} = selectors
+const {
+  credentials: { email, password },
+  portalHome,
+  portalURL,
+  simulator: simulatorConstant
+} = constants
 
 describe('Open Liferay', () => {
   beforeEach(() => {
-    Cypress.Cookies.defaults({
-      preserve: [
-        'JSESSIONID',
-        'LFR_SESSION_STATE_20126',
-        'SCREEN_NAME',
-        'COMPANY_ID',
-        'GUEST_LANGUAGE_ID',
-        'LFR_SESSION_STATE_20103',
-        'COOKIE_SUPPORT'
-      ]
-    })
-
+    constants.preserve()
     cy.wait(500)
   })
 
   it('Abrir o Liferay Portal', () => {
     const { helloWorldContainer, welcomeContainer } = homePage
     cy.visit(portalURL)
-    cy.get(helloWorldContainer).contains('Hello World')
-    cy.get(welcomeContainer).contains('Welcome to Liferay Community')
-    cy.title().should('eq', 'Home - Liferay')
-    cy.get('#footer').contains('By Liferay')
+    cy.get(helloWorldContainer).contains(portalHome.helloWorld)
+    cy.get(welcomeContainer).contains(portalHome.welcome)
+    cy.title().should('eq', portalHome.title)
+    cy.get('#footer').contains(portalHome.footer)
   })
 
   it('Fazer Login', () => {
@@ -76,7 +66,7 @@ describe('Open Liferay', () => {
         .should('not.be.visible')
 
       cy
-        .get('#_com_liferay_product_navigation_simulation_web_portlet_SimulationPortlet_simulationToggleId')
+        .get(simulatorSelector.openSimulation)
         .parent()
         .click()
 
@@ -88,35 +78,27 @@ describe('Open Liferay', () => {
     })
 
     it('Executar a simulação em diversos viewports', () => {
-      const buttons = [
-        'Desktop',
-        'Tablet',
-        'Mobile',
-        'AutoSize',
-        'Custom'
-      ]
-
       cy.get('.default-devices button').should('have.length', 5).each((button, index) => {
-        const actualButton = buttons[index]
+        const actualButton = constants.buttons[index]
         cy.get(button).as('button').click()
         cy.get('@button').contains(actualButton)
-        cy.wait(1200)
+        cy.wait(1000)
       })
 
-      cy.get('#_com_liferay_product_navigation_simulation_web_portlet_SimulationPortlet_height')
-        .should('have.value', 600)
+      cy.get(simulatorSelector.height)
+        .should('have.value', simulatorConstant.defaultValue)
         .clear()
-        .type(600)
+        .type(simulatorConstant.height)
 
-      cy.get('#_com_liferay_product_navigation_simulation_web_portlet_SimulationPortlet_width')
-        .should('have.value', 600)
+      cy.get(simulatorSelector.width)
+        .should('have.value', simulatorConstant.defaultValue)
         .clear()
-        .type(800)
+        .type(simulatorConstant.width)
     })
 
     it('Fechar Sidebar de Simulação', () => {
       cy.get('@sidebar').within(() => {
-        cy.get('#ored____').click()
+        cy.get(simulatorSelector.closeSimulator).click()
       })
     })
   })

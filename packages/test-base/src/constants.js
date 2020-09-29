@@ -18,12 +18,18 @@ const languages = {
 }
 
 module.exports = {
+  buttons: [
+    'Desktop',
+    'Tablet',
+    'Mobile',
+    'AutoSize',
+    'Custom'
+  ],
   credentials: {
-    login: 'test',
     email: 'test@liferay.com',
+    login: 'test',
     password: 'test'
   },
-  portalURL,
   defaultLanguageId,
   fieldTypes: [
     {
@@ -97,11 +103,36 @@ module.exports = {
     { name: 'Fields Group' },
     { name: 'Upload', type: 'document_library' }
   ],
-  languages,
   languageId: defaultLanguageId.replace('_', '-'),
+  languages,
   modules: {
     accountSettings: `${portalURL}/group/control_panel/manage?p_p_id=com_liferay_my_account_web_portlet_MyAccountPortlet&p_p_lifecycle=0&p_p_auth=68JLVPmH`,
     instance: `${portalURL}/group/control_panel/manage?p_p_id=com_liferay_configuration_admin_web_portlet_InstanceSettingsPortlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&_com_liferay_configuration_admin_web_portlet_InstanceSettingsPortlet_mvcRenderCommandName=%2Fview_configuration_screen&_com_liferay_configuration_admin_web_portlet_InstanceSettingsPortlet_configurationScreenKey=language`,
     object: `${portalURL}/group/guest/~/control_panel/manage?p_p_id=com_liferay_app_builder_web_internal_portlet_ObjectsPortlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&p_p_auth=cIaiVlKB%2F#/`
+  },
+  portalHome: {
+    footer: 'Powered By',
+    helloWorld: 'Hello World',
+    title: 'Home - Liferay',
+    welcome: 'Welcome to Liferay Community'
+  },
+  portalURL,
+  simulator: {
+    defaultValue: '600',
+    height: '768',
+    width: '1024'
+  },
+  preserve: () => {
+    Cypress.Cookies.defaults({
+      preserve: [
+        'JSESSIONID',
+        'LFR_SESSION_STATE_20126',
+        'SCREEN_NAME',
+        'COMPANY_ID',
+        'GUEST_LANGUAGE_ID',
+        'LFR_SESSION_STATE_20103',
+        'COOKIE_SUPPORT'
+      ]
+    })
   }
 }

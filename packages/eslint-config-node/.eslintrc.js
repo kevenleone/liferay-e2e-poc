@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     commonjs: true,
     'cypress/globals': true,
-    es6: true
+    es6: true,
   },
   extends: [
     'standard',
@@ -13,7 +13,7 @@ module.exports = {
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaFeatures: {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="2"
+            failures="0"
+            tests="2">
+
+  <testsuite name="index"
+    errors="2" failures="0" hostname="" id="" package="index" skipped="0"
+    tests="2" time="0.003000" timestamp="">
+  
+    <testcase name="Open Liferay Portal and Validate Items" classname="index" time="0.003000" assertions="0">
+    <error message="browser.url is not a function" type="error"><![CDATA[
+    TypeError: browser.url is not a function
+    at Object.Open Liferay Portal and Validate Items (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:13:13)
+    at Context.callAsync (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:395:20)
+    at Context.invokeMethod (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:346:21)
+    at Promise (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:75:24)
+    at new Promise (&lt;anonymous&gt;)
+    at UnitTest.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:50:14)
+    at TestCase.runUnitTest (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:64:21)
+    at TestCase.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:47:23)
+    at Runnable.handleRunnable [as __runFn] (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/index.js:376:80)
+    at Runnable.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/runnable.js:123:21)
+    ]]></error>
+    
+    </testcase>
+  
+    <testcase name="Open Liferay Portal and do Login" classname="index" time="0.000" assertions="0">
+    <error message="browser.url is not a function" type="error"><![CDATA[
+    TypeError: browser.url is not a function
+    at Object.Open Liferay Portal and do Login (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:39:8)
+    at Context.callAsync (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:395:20)
+    at Context.invokeMethod (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:346:21)
+    at Promise (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:75:24)
+    at new Promise (&lt;anonymous&gt;)
+    at UnitTest.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:50:14)
+    at TestCase.runUnitTest (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:64:21)
+    at TestCase.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:47:23)
+    at Runnable.handleRunnable [as __runFn] (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/index.js:376:80)
+    at Runnable.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/runnable.js:123:21)
+    ]]></error>
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        TypeError: browser.url is not a function
+   - writing an ES6 async test case? - keep in mind that commands return a Promise; 
+   - writing unit tests? - make sure to specify &#34;unit_tests_mode=true&#34; in your config.
+       at Object.Open Liferay Portal and Validate Items (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:13:13)
+       at new Promise (&lt;anonymous&gt;)
+  TypeError: browser.url is not a function
+   - writing an ES6 async test case? - keep in mind that commands return a Promise; 
+   - writing unit tests? - make sure to specify &#34;unit_tests_mode=true&#34; in your config.
+       at Object.Open Liferay Portal and do Login (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:39:8)
+       at new Promise (&lt;anonymous&gt;)
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

@@ -1,8 +1,8 @@
-import { Selector } from 'testcafe';
 import { constants, selectors } from '@monorepo/test-base'
+import { Selector } from 'testcafe'
 
-const { login: loginSelector } = selectors;
-const { credentials: { login, password } } = constants;
+const { login: loginSelector } = selectors
+const { credentials: { login, password } } = constants
 
 // await t
 //     .typeText('#developer-name', 'John Smith')
@@ -14,18 +14,18 @@ const { credentials: { login, password } } = constants;
 // let headerText = await articleHeader.innerText;
 
 fixture`Liferay Portal`
-    .page(constants.portalURL);
+  .page(constants.portalURL)
 
 test('Do Login Action', async t => {
-    await t
-        .click(loginSelector.loginLink)
-        .typeText(loginSelector.emailInput, login)
-        .typeText(loginSelector.passwordInput, password)
-        .click(loginSelector.loginButton);
-});
+  await t
+    .click(loginSelector.loginLink)
+    .typeText(loginSelector.emailInput, login)
+    .typeText(loginSelector.passwordInput, password)
+    .click(loginSelector.loginButton)
+})
 
 fixture`App builder - Object`
-    .page(constants.modules.object)
+  .page(constants.modules.object)
 
 test('Open Visit Page', async t => {
 
