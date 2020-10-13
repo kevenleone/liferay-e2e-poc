@@ -55,9 +55,7 @@ test('Open Liferay Portal and Validate Items', async t => {
 })
 
 test('Welcome Page', async t => {
-  const [userAvatar] = [
-    Selector(selectors.userAvatar)
-  ]
+  const userAvatar = Selector(selectors.userAvatar)
 
   await t
     .useRole(loggedUser)

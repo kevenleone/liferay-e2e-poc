@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
-            tests="4">
+            failures="1"
+            tests="2">
 
   <testsuite name="index"
-    errors="0" failures="0" hostname="" id="" package="index" skipped="0"
-    tests="4" time="4.381" timestamp="">
+    errors="0" failures="1" hostname="" id="" package="index" skipped="2"
+    tests="2" time="7.961" timestamp="">
   
-    <testcase name="Open Liferay Portal and Validate Items" classname="index" time="0.7370" assertions="5">
+    <testcase name="Open Liferay Portal and Validate Items" classname="index" time="1.321" assertions="5">
 
     
 
@@ -20,37 +20,11 @@
     
     </testcase>
   
-    <testcase name="Open Liferay Portal and do Login" classname="index" time="1.031" assertions="4">
+    <testcase name="Open Liferay Portal and do Login" classname="index" time="6.640" assertions="3">
 
     
 
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Welcome Page" classname="index" time="0.01500" assertions="1">
-
-    
-    </testcase>
-  
-    <testcase name="Open Screen simulator and run simulations" classname="index" time="2.598" assertions="8">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+      <failure message="Expected element &lt;#_com_liferay_login_web_portlet_LoginPortlet_login&gt; to have value that equals: &#34;test@liferay.com&#34; - expected &#34;equals &#39;test@liferay.com&#39;&#34; but got: &#34;@liferay.com&#34; (5079ms)">    at Object.Open Liferay Portal and do Login (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:62:8)</failure>
 
     
     </testcase>
@@ -60,6 +34,18 @@
 
     
 
+  
+    
+    <testcase
+      name="Welcome Page" classname="index">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Open Screen simulator and run simulations" classname="index">
+      <skipped />
+    </testcase>
+    
   
   </testsuite>
 </testsuites>
