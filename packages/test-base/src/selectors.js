@@ -1,8 +1,8 @@
 module.exports = {
   accountSettingsLanguageSelect: '#_com_liferay_my_account_web_portlet_MyAccountPortlet_languageId',
   homePage: {
-    helloWorldContainer: '#fragment-0-rlis',
-    welcomeContainer: '#fragment-0-xjkl'
+    helloWorldContainer: '#fragment-0-qufk',
+    welcomeContainer: '#fragment-0-dngf'
   },
   login: {
     emailInput: '#_com_liferay_login_web_portlet_LoginPortlet_login',

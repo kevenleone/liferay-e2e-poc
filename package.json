@@ -7,6 +7,11 @@
     "private": true,
     "scripts": {
       "format": "eslint packages/**/src/* --ext .js --fix",
+      "test:cafe": "yarn workspace @monorepo/testcafe test",
+      "test:cypress": "yarn workspace @monorepo/cypress test",
+      "test:nightwatch": "yarn workspace @monorepo/nightwatch test",
+      "test:playwright": "yarn workspace @monorepo/playwright test",
+      "test:taiko": "yarn workspace @monorepo/taiko test",
       "test": "jest"
     },
     "workspaces": {

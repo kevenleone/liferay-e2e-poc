@@ -7,6 +7,6 @@
     "testcafe": "^1.9.3"
   },
   "scripts": {
-    "start": "testcafe chrome tests/portal.js"
+    "test": "testcafe chrome tests/portal.js"
   }
 }

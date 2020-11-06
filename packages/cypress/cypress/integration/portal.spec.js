@@ -16,15 +16,14 @@ const {
 describe('Open Liferay', () => {
   beforeEach(() => {
     constants.preserve()
-    cy.wait(500)
   })
 
   it('Abrir o Liferay Portal', () => {
     const { helloWorldContainer, welcomeContainer } = homePage
     cy.visit(portalURL)
 
-    // cy.get(helloWorldContainer).contains(portalHome.helloWorld)
-    // cy.get(welcomeContainer).contains(portalHome.welcome)
+    cy.get(helloWorldContainer).contains(portalHome.helloWorld)
+    cy.get(welcomeContainer).contains(portalHome.welcome)
     cy.title().should('eq', portalHome.title)
     cy.get('#footer').contains(portalHome.footer)
   })
@@ -66,6 +65,8 @@ describe('Open Liferay', () => {
       cy.get('@sidebar')
         .should('not.be.visible')
 
+      cy.wait(100)
+
       cy
         .get(simulatorSelector.openSimulation)
         .parent()
@@ -83,7 +84,6 @@ describe('Open Liferay', () => {
         const actualButton = constants.buttons[index]
         cy.get(button).as('button').click()
         cy.get('@button').contains(actualButton)
-        cy.wait(1000)
       })
 
       cy.get(simulatorSelector.height)

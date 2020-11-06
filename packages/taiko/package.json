@@ -1,5 +1,5 @@
 {
-  "name": "taiko",
+  "name": "@monorepo/taiko",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,6 +7,6 @@
     "taiko": "^1.0.23"
   },
   "scripts": {
-    "dev": "npx taiko test.js --observe"
+    "test": "npx taiko test.js --observe"
   }
 }

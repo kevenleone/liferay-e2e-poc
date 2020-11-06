@@ -1,5 +1,5 @@
 {
-  "name": "playwright",
+  "name": "@monorepo/playwright",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,6 +7,6 @@
     "playwright": "^1.5.1"
   },
   "scripts": {
-    "test": "DEBUG=pw:api PWDEBUG=1 nodemon index.js"
+    "test": "DEBUG=pw:api PWDEBUG=1 node index.js"
   }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="index"
+    errors="0" failures="0" hostname="" id="" package="index" skipped="0"
+    tests="4" time="4.383" timestamp="">
+  
+    <testcase name="Open Liferay Portal and Validate Items" classname="index" time="0.7060" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Open Liferay Portal and do Login" classname="index" time="1.043" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Welcome Page" classname="index" time="0.02100" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Open Screen simulator and run simulations" classname="index" time="2.613" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

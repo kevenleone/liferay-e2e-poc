@@ -1,64 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="2"
+<testsuites errors="1"
             failures="0"
-            tests="2">
+            tests="0">
 
   <testsuite name="index"
-    errors="2" failures="0" hostname="" id="" package="index" skipped="0"
-    tests="2" time="0.003000" timestamp="">
-  
-    <testcase name="Open Liferay Portal and Validate Items" classname="index" time="0.003000" assertions="0">
-    <error message="browser.url is not a function" type="error"><![CDATA[
-    TypeError: browser.url is not a function
-    at Object.Open Liferay Portal and Validate Items (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:13:13)
-    at Context.callAsync (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:395:20)
-    at Context.invokeMethod (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:346:21)
-    at Promise (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:75:24)
-    at new Promise (&lt;anonymous&gt;)
-    at UnitTest.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:50:14)
-    at TestCase.runUnitTest (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:64:21)
-    at TestCase.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:47:23)
-    at Runnable.handleRunnable [as __runFn] (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/index.js:376:80)
-    at Runnable.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/runnable.js:123:21)
-    ]]></error>
-    
-    </testcase>
-  
-    <testcase name="Open Liferay Portal and do Login" classname="index" time="0.000" assertions="0">
-    <error message="browser.url is not a function" type="error"><![CDATA[
-    TypeError: browser.url is not a function
-    at Object.Open Liferay Portal and do Login (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:39:8)
-    at Context.callAsync (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:395:20)
-    at Context.invokeMethod (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/context.js:346:21)
-    at Promise (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:75:24)
-    at new Promise (&lt;anonymous&gt;)
-    at UnitTest.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/hooks/_basehook.js:50:14)
-    at TestCase.runUnitTest (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:64:21)
-    at TestCase.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/testcase.js:47:23)
-    at Runnable.handleRunnable [as __runFn] (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/index.js:376:80)
-    at Runnable.run (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/testsuite/runnable.js:123:21)
-    ]]></error>
-    
-    </testcase>
+    errors="1" failures="0" hostname="" id="" package="index" skipped="4"
+    tests="0" time="0.000" timestamp="">
   
 
   
     <system-err>
-        TypeError: browser.url is not a function
-   - writing an ES6 async test case? - keep in mind that commands return a Promise; 
-   - writing unit tests? - make sure to specify &#34;unit_tests_mode=true&#34; in your config.
-       at Object.Open Liferay Portal and Validate Items (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:13:13)
-       at new Promise (&lt;anonymous&gt;)
-  TypeError: browser.url is not a function
-   - writing an ES6 async test case? - keep in mind that commands return a Promise; 
-   - writing unit tests? - make sure to specify &#34;unit_tests_mode=true&#34; in your config.
-       at Object.Open Liferay Portal and do Login (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/index.js:39:8)
-       at new Promise (&lt;anonymous&gt;)
+        Error: An error occurred while retrieving a new session: &#34;invalid argument: can&#39;t kill an exited process&#34;
+       at endReadableNT (_stream_readable.js:1145:12)
     </system-err>
   
 
     
+    <error message="An error occurred while retrieving a new session: &#34;invalid argument: can&#39;t kill an exited process&#34;"><![CDATA[
+      Error: An error occurred while retrieving a new session: &#34;invalid argument: can&#39;t kill an exited process&#34;
+    at WebdriverProtocol.handleSessionCreateError (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/transport/transport.js:103:15)
+    at HttpRequest.request.on.err (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/transport/transport.js:159:32)
+    at HttpRequest.emit (events.js:198:13)
+    at HttpResponse.originalIssuer.on.args (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/http/request.js:142:19)
+    at HttpResponse.emit (events.js:198:13)
+    at IncomingMessage.res.on (/Users/keven/Documents/Projects/Liferay/side-projects/e2e-poc/packages/nightwatch/node_modules/nightwatch/lib/http/response.js:60:14)
+    at IncomingMessage.emit (events.js:203:15)
+    at endReadableNT (_stream_readable.js:1145:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+      ]]></error>  
 
+  
+    
+    <testcase
+      name="Open Liferay Portal and Validate Items" classname="index">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Open Liferay Portal and do Login" classname="index">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Welcome Page" classname="index">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Open Screen simulator and run simulations" classname="index">
+      <skipped />
+    </testcase>
+    
   
   </testsuite>
 </testsuites>

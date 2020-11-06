@@ -48,10 +48,10 @@ test('Open Liferay Portal and Validate Items', async t => {
     Selector('#footer').textContent
   ]
 
-  // await t
-  //   .expect(helloWorld).contains(portalHome.helloWorld)
-  //   .expect(welcome).contains(portalHome.welcome)
-  //   .expect(footer).contains(portalHome.footer)
+  await t
+    .expect(helloWorld).contains(portalHome.helloWorld)
+    .expect(welcome).contains(portalHome.welcome)
+    .expect(footer).contains(portalHome.footer)
 })
 
 test('Welcome Page', async t => {
@@ -82,10 +82,7 @@ test('Open screen simulator and run simulations', async t => {
   for (const device of constants.buttons) {
     const selector = `.default-devices button:nth-child(${i})`
     const device = Selector(selector)
-    await t.click(device).wait(1000)
-
-    // const small = Selector(`${selector} small`)
-    // t.expect(small.textContent).eql(_device)
+    await t.click(device)
     i++
   }
 
