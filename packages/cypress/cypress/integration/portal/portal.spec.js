@@ -23,8 +23,8 @@ describe('Open Liferay', () => {
     const { helloWorldContainer, welcomeContainer } = homePage
     cy.visit(portalURL)
 
-    cy.get(helloWorldContainer).contains(portalHome.helloWorld)
-    cy.get(welcomeContainer).contains(portalHome.welcome)
+    // cy.get(helloWorldContainer).contains(portalHome.helloWorld)
+    // cy.get(welcomeContainer).contains(portalHome.welcome)
     cy.title().should('eq', portalHome.title)
     cy.get('#footer').contains(portalHome.footer)
   })

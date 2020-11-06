@@ -48,10 +48,10 @@ test('Open Liferay Portal and Validate Items', async t => {
     Selector('#footer').textContent
   ]
 
-  await t
-    .expect(helloWorld).contains(portalHome.helloWorld)
-    .expect(welcome).contains(portalHome.welcome)
-    .expect(footer).contains(portalHome.footer)
+  // await t
+  //   .expect(helloWorld).contains(portalHome.helloWorld)
+  //   .expect(welcome).contains(portalHome.welcome)
+  //   .expect(footer).contains(portalHome.footer)
 })
 
 test('Welcome Page', async t => {

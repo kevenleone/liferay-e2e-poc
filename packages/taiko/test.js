@@ -15,6 +15,7 @@ const Login = async () => {
   await click('Sign In')
   const emailInput = await $(selectors.login.emailInput)
   const passwordInput = await $(selectors.login.passwordInput)
+  waitFor(5000)
 
   await write(constants.credentials.login, into(emailInput))
   await write(constants.credentials.password, into(passwordInput))
