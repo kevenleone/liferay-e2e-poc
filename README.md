@@ -1,41 +1,224 @@
-<p align="center"> A monorepo boilerplate</p>
+# E2E frameworks analysis
 
-<p align="center">
-  <a href="http://makeapullrequest.com">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License MIT">
-  </a>
-</p>
+## Candidates
 
-## :bulb: Introduction 
+- Test Café
+- Cypress
+- NightWatch
+- Taiko
+- PlayWright
+- Robot Framework
 
-....
+## Test Case / Step by Step
 
-## :house: Getting started
+The tests were made based on the following scenarios
 
-1. Clone this repo using: `https://github.com/kevenleone/monorepo.git`
-2. Install the packages using your preference package manager ( yarn install )
+1. Open Liferay Portal
+    1. Check if the text "**Hello World**" is present
+    2. Check if text "**Welcome to Liferay Community**" is present
+    3. Check if the page title (the same over the tab) is **"Home - Liferay"**
+    4. check if footer **contains the text** "**Powered By**"
+2. Do the sign in
+    1. Click on "**Sign In**" name (the anchor)
+    2. Check if Email Address already have "**@liferay.com**" filled.
+    3. Remove the predefined value in "**Email Address"** and type  "**test@liferay.com**", check if the value **"test@liferay.com"** is present.
+    4. Check if Password is **empty** and type "**test**"
+    5. Check if "**Sign In**" button is enabled and click on it.
+3. Welcome Page (**After Login**)
+    1. Check if "**user avatar**" is present.
+    2. Check if the right sidebar is not visible.
+    3. Open Simulation Guide
+    4. Select all screen options available
+    5. Set up a custom resolution, for example 6**00x800**
 
-## :tada: Features
+# Test Café
 
-This project implement the following features
+[DevExpress/testcafe](https://github.com/DevExpress/testcafe)
 
-- :clipboard: **Eslint** - To ensure code-quality. 
+### Browsers
 
-## :zap: Commands
-- `yarn format` - To format code
+- Google Chrome: Stable, Beta, Dev and Canary
+- Internet Explorer (11+)
+- Microsoft Edge (legacy and Chromium-based)
+- Mozilla Firefox
+- Safari
+- Google Chrome mobile
+- Safari mobile
 
-## :handshake: **Contributing**
-If you liked the project and want to cooperate feel free to fork this repository and send Pull Requests.
+### Pros
 
-All kinds of contributions are very welcome and appreciated
+- Fast test execution
+- Headless mode
+- Custom Reporters
+- Promises Based
+- Compatible with popular CI
+- HTTP Intercept / Mock
+- Record Screenshots and Videos
+- Great Documentation
+- The giant cursor helps the users follow each step
+- Concurrent Test
+- Live Watch - Hot Reloading
 
--   ⭐️ Star the project
--   🐛 Find and report issues
--   📥 Submit PRs to help solve issues or add features
+### Cons
 
+- Sometimes it's hard to debug a test error
+- The community it's still growing and examples and helps/tutorials are sparse
+- No way to debug the test while test is going on
+- Some icons disappear on tests execution
 
-## :book: License
-MIT license, Copyright (c) 2020 Keven Leone.
+![E2E%20frameworks%20analysis%202790ea7b03d64398b8f9d0dac0e4a8e5/Untitled.png](assets/Untitled.png)
+
+![assets/Untitled%201.png](assets/Untitled%201.png)
+
+![assets/Untitled%202.png](assets/Untitled%202.png)
+
+![assets/Untitled%203.png](assets/Untitled%203.png)
+
+- Uncaught errors simply closes the browser and tests are stopped.
+- No way to create multiple describe and test scope
+
+### Test result
+
+⏱️ Test done after 15s without any wait
+
+✅ Test passed with assertions 
+
+## Cypress
+
+[JavaScript End to End Testing Framework](https://www.cypress.io/)
+
+### Browsers
+
+- Google Chrome: Stable, Beta, Dev and Canary
+- Microsoft Edge
+- Mozilla Firefox
+- Electron
+- Brave
+
+### Pros
+
+- Fast test execution
+- Headless mode
+- Custom Reporters
+- Compatible with popular CI
+- HTTP Intercept / Mock
+- Record Screenshots and Videos
+- Great Documentation
+- Debug While tests are running
+- Time Travel
+- Automatic waiting
+- Viewport size
+- Common test syntax using Describe and It
+
+### Cons
+
+- It's not compatible with Safari and Internet Explorer
+- Cannot run multiple browsers at the same time
+- Cypress is not a general purpose automation tool.
+- Each Cypress Test must be used inside a Test scope and cannot be associated to an variable
+
+### Test result
+
+⏱️ Test done after 4.53s without any wait
+
+✅ Test passed with assertions 
+
+# Nightwatch
+
+[nightwatchjs/nightwatch](https://github.com/nightwatchjs/nightwatch)
+
+Nightwatch.js is an automated end-to-end testing framework for web applications and websites. It is written in Node.js and uses the W3C WebDriver API (formerly Selenium WebDriver) for interacting with various browsers.
+
+### Browsers
+
+- Safari
+- Chrome
+- Firefox
+
+### Pros
+
+- Fast test execution
+- Headless Mode
+
+### Cons
+
+- No watch mode
+- Too verbose
+- Test failures closes the browser and not execute other tests
+- Asserts not matching after type on Input
+- Week API
+- No Intelisense on VScode
+- No wait or Automatic waiting strategy
+
+### Test result
+
+⏱️ Test done after 6.87s without any wait
+
+✅ Test passed with assertions 
+
+### Taiko
+
+[getgauge/taiko](https://github.com/getgauge/taiko)
+
+### Browsers
+
+- Chrome/Chromium
+- Microsoft Edge
+- Opera (unverified)
+- Firefox (experimental)
+
+### Pros
+
+- Selector in evidence during the test execution
+- Log well detailed
+- Simplified Syntax
+
+### Cons
+
+- Week API
+- Week Documentation
+- Assertion API aside
+- Slow Execution
+
+### Test result
+
+⏱️ Test done after 54.24s
+
+⚠️ Test passed without assertions 
+
+## Playwright
+
+[microsoft/playwright](https://github.com/microsoft/playwright)
+
+### Browsers
+
+- Chromium
+- Firefox
+- Webkit
+
+### Pros
+
+- Selector in evidence during the test execution
+- Log well detailed
+- Simplified Syntax
+- Good to emulate geolocation and mobile devices
+- Auto wait elements
+- Screenshots
+- Network intercept
+- Fast test execution
+- Headless mode
+- CI Integration
+
+### Cons
+
+- Week Documentation
+- Assertion API aside
+- Few browsers to play
+- No videos recording by default
+- You may have bad experience without using page objects to driver your test
+
+### Test result
+
+⏱️ Test done after 4.72s without any wait
+
+⚠️ Test passed without assertions
