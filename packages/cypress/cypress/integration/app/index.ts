@@ -1,10 +1,11 @@
+import { Config } from '../utils/interfaces';
 import TestBase from '../utils/TestBase';
 
 export default class App extends TestBase {
-  private config: any;
+  private config: Config;
   private selectors: any;
 
-  constructor (config) {
+  constructor (config: Config) {
     super();
     this.config = config;
     this.selectors = {
@@ -12,7 +13,7 @@ export default class App extends TestBase {
     };
   }
 
-  _validateCreatedItemInForm (item) {
+  private validateCreatedItemInForm (item?) {
     if (item) {
       const value = item[this.getLanguageId()] || item[this.getDefaultLanguageId()];
       const fakeValue = 'keven';
@@ -39,7 +40,7 @@ export default class App extends TestBase {
     cy.get(this.selectors.primaryButton).click();
   }
 
-  _deployAs (options = {}) {
+  private deployAs (options = {}) {
     cy.get(this.selectors.primaryButton).should('be.disabled');
 
     const onToggle = (index, name) => {
@@ -63,7 +64,7 @@ export default class App extends TestBase {
     });
   }
 
-  pipeline (openStandalone = true) {
+  pipeline (openStandalone = true): void {
     const { app: { config, name }, formView: { name: formViewName }, tableView: { name: tableViewName } } = this.config;
     it('Should open [App] Tab', () => {
       this.changeObjectTab(2);
@@ -82,19 +83,19 @@ export default class App extends TestBase {
     });
 
     it('Should validate [FormView] content', () => {
-      this._validateCreatedItemInForm(formViewName);
+      this.validateCreatedItemInForm(formViewName);
     });
 
     it('Should validate [TableView] content', () => {
-      this._validateCreatedItemInForm(tableViewName);
+      this.validateCreatedItemInForm(tableViewName);
     });
 
     it('Should validate [Workflow] content', () => {
-      this._validateCreatedItemInForm();
+      this.validateCreatedItemInForm();
     });
 
     it(`Should check options ${Object.keys(config).join(', ')}`, () => {
-      this._deployAs(config);
+      this.deployAs(config);
     });
 
     let standaloneApp;

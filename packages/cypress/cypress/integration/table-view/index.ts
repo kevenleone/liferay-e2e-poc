@@ -27,11 +27,11 @@ export default class TableView extends TestBase {
     this.managementTitle(name);
   }
 
-  closeSidebar () {
+  private closeSidebar (): void {
     cy.get(this.selectors.closeSidebar).click({ force: true });
   }
 
-  openSidebar () {
+  private openSidebar (): void {
     cy.get(this.selectors.openSidebar).click({ force: true });
   }
 
@@ -39,7 +39,7 @@ export default class TableView extends TestBase {
     cy.get(this.selectors.emptyDragzone).should('be.visible');
   }
 
-  pipeline () {
+  pipeline (): void {
     const { formView: { fieldTypes }, tableView: { name } } = this.config;
 
     it('Open Add TableView', () => {

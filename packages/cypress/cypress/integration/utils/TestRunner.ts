@@ -3,6 +3,7 @@ import FormView from '../form-view';
 import ObjectModule from '../object';
 import Portal from '../portal';
 import TableView from '../table-view';
+import { Config } from './interfaces';
 
 class TestRunner {
   public defaultTime: number;
@@ -12,7 +13,7 @@ class TestRunner {
   public portal: Portal;
   public object: ObjectModule;
 
-  constructor (config: any) {
+  constructor (config: Config) {
     this.defaultTime = 1000;
 
     this.app = new App(config);

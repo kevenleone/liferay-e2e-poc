@@ -1,3 +1,4 @@
+import { Config } from '../utils/interfaces';
 import TestRunner from '../utils/TestRunner';
 
 const testConfig = {
@@ -53,8 +54,9 @@ const testConfig = {
 };
 
 class ViewEntryDetails extends TestRunner {
-  config: any;
+  config: Config;
   selectors: any;
+
   constructor () {
     super(testConfig);
     this.config = testConfig;
