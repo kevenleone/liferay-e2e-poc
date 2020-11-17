@@ -345,24 +345,24 @@ class FormView extends TestBase {
         cy.get('.tab-pane .field-type').should('not.exist')
         cy.get('@search-input').clear()
       })
-      this._composeFields(parent, { fatherSelector })
+      // this.composeFields(parent, { fatherSelector })
     })
   }
 
-  runPipeline () {
-    describe('Should set title and Form in multiple languages', () => {
-      Object.keys(name).forEach((languageId) => {
-        if (languageId !== this.getDefaultLanguageId()) {
-          const value = this.getLocalizedPrefenceValue(name, languageId)
-          this._composeFields(this.config.formView, {
-            addField: false,
-            languageId,
-            value
-          })
-        }
-      })
-    })
-  }
+  // runPipeline () {
+  //   describe('Should set title and Form in multiple languages', () => {
+  //     Object.keys(name).forEach((languageId) => {
+  //       if (languageId !== this.getDefaultLanguageId()) {
+  //         const value = this.getLocalizedPrefenceValue(name, languageId)
+  //         this.composeFields(this.config.formView, {
+  //           addField: false,
+  //           languageId,
+  //           value
+  //         })
+  //       }
+  //     })
+  //   })
+  // }
 }
 
 module.exports = FormView

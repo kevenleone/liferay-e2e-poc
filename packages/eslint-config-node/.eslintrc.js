@@ -8,8 +8,7 @@ module.exports = {
   extends: [
     'standard',
     'prettier/standard',
-    'plugin:cypress/recommended',
-    'plugin:react/recommended'
+    'plugin:cypress/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -24,9 +23,9 @@ module.exports = {
   plugins: [
     'cypress',
     'simple-import-sort',
+    'prettier',
     'sort-destructure-keys',
-    'sort-keys-fix',
-    'react'
+    'sort-keys-fix'
   ],
   rules: {
     'cypress/assertion-before-screenshot': 'warn',
@@ -34,16 +33,8 @@ module.exports = {
     'cypress/no-async-tests': 'error',
     'cypress/no-force': 'warn',
     'cypress/no-unnecessary-waiting': 'error',
-    'max-len': ['error', { code: 120 }],
+    'max-len': ['error', { code: 80 }],
     'simple-import-sort/sort': 'error',
     'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: false }],
-    'sort-keys': ['error', 'asc', { caseSensitive: true, natural: false, minKeys: 2 }],
-    'react/prop-types': 0,
-    'react/jsx-filename-extension': [
-      'error',
-      {
-        extensions: ['.js', '.jsx']
-      }
-    ]
-  }
+    'sort-keys': ['error', 'asc', { caseSensitive: true, natural: false, minKeys: 2 }]  }
 }

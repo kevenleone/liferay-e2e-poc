@@ -1,28 +1,15 @@
-const Portal = require('../portal')
-const ObjectModule = require('../object')
-const TestBase = require('../utils/TestBase')
-const FormView = require('../form-view/')
-const TableView = require('../table-view')
-const App = require('../app')
+const TestRunner = require('../utils/TestRunner')
 
-class ViewEntryDetails extends TestBase {
-  constructor () {
-    super()
-    this.selectors = {}
-    this.portal = new Portal()
-    this.object = new ObjectModule()
-    this.formView = new FormView()
-    this.tableView = new TableView()
-    this.app = new App()
-    this.config = {
-      name: {
-        appName: { 'en-US': 'My App' },
-        formViewName: { 'en-US': 'My Form' },
-        tableViewName: { 'en-US': 'My Table' }
-      }
+const config = {
+  app: {
+    config: { product: true, standalone: true, widget: false },
+    name: {
+      'en-US': 'Vacation Request - LATAM',
+      'pt-BR': 'Solicitação de Férias - LATAM'
     }
-
-    this.fieldTypes = [
+  },
+  formView: {
+    fieldTypes: [
       {
         config: {
           label: { 'en-US': 'Full Name', 'pt-BR': 'Nome Completo' },
@@ -44,10 +31,32 @@ class ViewEntryDetails extends TestBase {
           repeatable: false,
           required: true,
           showLabel: true
+
         },
         name: 'Select from List',
         type: 'select'
-      }]
+      }
+    ],
+    name: { 'en-US': 'Vacation Request', 'pt-BR': 'Solicitação de Férias' }
+  },
+  object: { name: 'Vacation Request' },
+  tableView: {
+    name: {
+      'en-US': 'Vacation Request - LATAM',
+      'pt-BR': 'Solicitação de Férias - LATAM'
+    },
+    selectedFields: [
+      { label: 'Full Name', value: 'Full Name' },
+      { label: 'Departament', value: 'Departament' }
+    ]
+  }
+}
+
+class ViewEntryDetails extends TestRunner {
+  constructor () {
+    super(config)
+    this.config = config
+    this.selectors = {}
   }
 
   test () {
@@ -74,11 +83,11 @@ class ViewEntryDetails extends TestBase {
       })
 
       describe('FormView', () => {
-        this.formView.composeFields(this.fieldTypes, {})
+        this.formView.composeFields(this.config.formView.fieldTypes, {})
 
         describe('Save it', () => {
           it('Set title', () => {
-            this.formView.setTitle(this.config.name.formViewName['en-US'])
+            this.formView.setTitle(this.config.formView.name['en-US'])
           })
 
           it('Save', () => {
@@ -88,11 +97,11 @@ class ViewEntryDetails extends TestBase {
       })
 
       describe('TableView', () => {
-        this.tableView.pipeline(this.config.name.tableViewName, this.fieldTypes)
+        this.tableView.pipeline()
       })
 
       describe('App', () => {
-        this.app.pipeline(this.config.name, { product: true, standalone: true, widget: false }, false)
+        this.app.pipeline()
       })
 
       describe('Application Menu', () => {
@@ -105,7 +114,9 @@ class ViewEntryDetails extends TestBase {
         })
 
         it('Open Application Menu App', () => {
-          cy.visit('http://localhost:8080/group/control_panel/manage?p_p_id=com_liferay_app_builder_web_internal_portlet_ProductMenuAppPortlet_39533applications&p_p_lifecycle=0&p_p_state=maximized&p_v_l_s_g_id=20121&p_p_auth=sOz3SkYS#/')
+          cy.visit(
+            'http://localhost:8080/group/control_panel/manage?p_p_id=com_liferay_app_builder_web_internal_portlet_ProductMenuAppPortlet_39533applications&p_p_lifecycle=0&p_p_state=maximized&p_v_l_s_g_id=20121&p_p_auth=sOz3SkYS#/'
+          )
         })
       })
     })

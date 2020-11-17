@@ -1,8 +1,9 @@
 const TestBase = require('../utils/TestBase')
 
 class App extends TestBase {
-  constructor () {
+  constructor (config) {
     super()
+    this.config = config
     this.selectors = {
       primaryButton: 'button.btn.btn-primary'
     }
@@ -59,7 +60,8 @@ class App extends TestBase {
     })
   }
 
-  pipeline ({ appName, formViewName, tableViewName }, config, openStandalone = true) {
+  pipeline (openStandalone = true) {
+    const { app: { config, name }, formView: { name: formViewName }, tableView: { name: tableViewName } } = this.config
     it('Should open [App] Tab', () => {
       this.changeObjectTab(2)
     })
@@ -73,7 +75,7 @@ class App extends TestBase {
     })
 
     it('Should set App title', () => {
-      this.managementTitle(appName)
+      this.managementTitle(name)
     })
 
     it('Should validate [FormView] content', () => {
@@ -102,7 +104,7 @@ class App extends TestBase {
     })
 
     it('Validate ListView', () => {
-      this.validateListView(appName)
+      this.validateListView(name)
     })
 
     if (openStandalone) {

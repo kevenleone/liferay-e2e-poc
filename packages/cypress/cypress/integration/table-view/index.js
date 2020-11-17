@@ -1,8 +1,9 @@
 const TestBase = require('../utils/TestBase')
 
 class TableView extends TestBase {
-  constructor () {
+  constructor (config) {
     super()
+    this.config = config
     this.selectors = {
       closeSidebar: '.close-sidebar-btn',
       emptyDragzone: '.empty-drop-zone',
@@ -35,7 +36,9 @@ class TableView extends TestBase {
     cy.get(this.selectors.emptyDragzone).should('be.visible')
   }
 
-  pipeline (name, fieldTypes) {
+  pipeline () {
+    const { formView: { fieldTypes }, tableView: { name } } = this.config
+
     it('Open Add TableView', () => {
       this.visit()
       this.newTableView()
