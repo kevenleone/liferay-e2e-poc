@@ -1,8 +1,10 @@
-const TestBase = require('../utils/TestBase')
+import TestBase from '../utils/TestBase';
 
-class FormView extends TestBase {
+export default class FormView extends TestBase {
+  private selectors: any;
+
   constructor () {
-    super()
+    super();
     this.selectors = {
       ddmDisplayStyle: '[data-field-name="displayStyle"]',
       ddmInline: '[data-field-name="inline"]',
@@ -22,47 +24,47 @@ class FormView extends TestBase {
       instanceLanguageSelect: '#_com_liferay_configuration_admin_web_portlet_InstanceSettingsPortlet_languageId',
       newItem: '.nav-item button.btn-primary',
       primaryButton: 'button.btn.btn-primary'
-    }
+    };
   }
 
   setTitle (value) {
     cy.get('.app-builder-root').within(() => {
-      cy.get('.tbar-item.tbar-item-expand input').type(value)
-    })
+      cy.get('.tbar-item.tbar-item-expand input').type(value);
+    });
   }
 
   composeFields (fieldTypes, { addField = true, fatherSelector = '', languageId = 'en_US' }) {
     fieldTypes.filter(({ type }) => type).map((field, index) => {
-      const isScrollDown = index >= 2
+      const isScrollDown = index >= 2;
       describe(`Should handle ${field.name} Field and Fill Values`, () => {
         it(`Scroll ${isScrollDown ? 'Down' : 'Up'}`, () => {
-          cy.scrollTo(isScrollDown ? 'bottom' : 'top')
-        })
+          cy.scrollTo(isScrollDown ? 'bottom' : 'top');
+        });
 
-        this._fieldCompose(field, {
+        this.fieldCompose(field, {
           addField,
           fatherSelector,
           languageId
-        })
+        });
 
         it('Dispose', () => {
-          cy.get(`${fatherSelector} .sidebar-header button`).eq(0).click()
-        })
-      })
-    })
+          cy.get(`${fatherSelector} .sidebar-header button`).eq(0).click();
+        });
+      });
+    });
   }
 
-  _deleteAllFieldsFromObject () {
+  private deleteAllFieldsFromObject () {
     cy.get('.custom-object-field').each(() => {
-      cy.get('.field-type-remove-icon button').eq(0).click({ force: true })
+      cy.get('.field-type-remove-icon button').eq(0).click({ force: true });
 
-      cy.get('.modal.show button.btn-primary').click()
-    })
+      cy.get('.modal.show button.btn-primary').click();
+    });
   }
 
-  _fieldCompose (field, { addField, doAction, fatherSelector, languageId }) {
-    const { type } = field
-    const localizedConfig = this.getLocalizedConfig(field.config, languageId)
+  private fieldCompose (field, { addField, doAction, fatherSelector, languageId }) {
+    const { type } = field;
+    const localizedConfig = this.getLocalizedConfig(field.config, languageId);
     const {
       dragType = 'dbClick',
       displayType,
@@ -78,7 +80,7 @@ class FormView extends TestBase {
       required,
       showAsSwitcher,
       showLabel = true
-    } = localizedConfig
+    } = localizedConfig;
 
     const {
       ddmDisplayStyle,
@@ -93,45 +95,45 @@ class FormView extends TestBase {
       ddmShowAsSwitcher,
       ddmShowLabel,
       ddmTip
-    } = this.selectors
+    } = this.selectors;
 
-    const withAdvancedField = predefinedValue || showLabel || repeatable || inline || predefinedOptions
+    const withAdvancedField = predefinedValue || showLabel || repeatable || inline || predefinedOptions;
 
     it('Log myself', () => {
-      cy.log({ localizedConfig })
-    })
+      cy.log({ localizedConfig });
+    });
 
     if (addField) {
-      const fieldSelector = `[data-field-type-name="${type}"]`
+      const fieldSelector = `[data-field-type-name="${type}"]`;
       if (dragType === 'dbClick') {
         it('Should add field on DataLayout using [dbClick]', () => {
-          cy.get(fieldSelector).dblclick()
-        })
+          cy.get(fieldSelector).dblclick();
+        });
       } else {
         it('Should add field on DataLayout using [drag-and-drop]', () => {
           if (dragType === 'dragTop') {
-            cy.get('.ddm-target').first().as('target')
+            cy.get('.ddm-target').first().as('target');
           } else {
-            cy.get('.ddm-target').last().as('target')
+            cy.get('.ddm-target').last().as('target');
           }
-          cy.get(fieldSelector).drag('@target')
-        })
+          cy.get(fieldSelector).drag('@target');
+        });
       }
     } else {
       it('Click on Field on Layout', () => {
-        cy.get(`.ddm-form-builder-wrapper [data-field-name="${field.config.id}"]`).eq(0).click()
-      })
+        cy.get(`.ddm-form-builder-wrapper [data-field-name="${field.config.id}"]`).eq(0).click();
+      });
     }
 
     const applySelector = (selector) => {
-      return fatherSelector ? `${fatherSelector} ${selector}` : selector
-    }
+      return fatherSelector ? `${fatherSelector} ${selector}` : selector;
+    };
 
     const changeTab = (index) => {
       it('Changing tab', () => {
-        cy.get('.component-tbar.ddm-form-tabs.tbar li').eq(index).click()
-      })
-    }
+        cy.get('.component-tbar.ddm-form-tabs.tbar li').eq(index).click();
+      });
+    };
 
     const setInputValue = (selector, value, id) => {
       it(`Typing [${value}] on [${id}]`, () => {
@@ -139,9 +141,9 @@ class FormView extends TestBase {
           .clear()
           .should('not.have.value')
           .type(value)
-          .should('have.value', value)
-      })
-    }
+          .should('have.value', value);
+      });
+    };
 
     const setChecked = (selector, id) => {
       if (doAction) {
@@ -149,10 +151,10 @@ class FormView extends TestBase {
           cy.get(`${applySelector(selector)} input`)
             .should('not.be.checked')
             .check()
-            .should('be.checked')
-        })
+            .should('be.checked');
+        });
       }
-    }
+    };
 
     const setUnchecked = (selector, id) => {
       if (doAction) {
@@ -160,26 +162,26 @@ class FormView extends TestBase {
           cy.get(`${applySelector(selector)} input`)
             .should('be.checked')
             .uncheck()
-            .should('not.be.checked')
-        })
+            .should('not.be.checked');
+        });
       }
-    }
+    };
 
     if (label) {
       it(`Typing [${label}] on [Label]`, () => {
         cy.get(`${ddmLabel} input.ddm-field-text`)
           .clear()
           .type(label)
-          .should('have.value', label)
-      })
+          .should('have.value', label);
+      });
     }
 
     if (placeholder) {
-      setInputValue(ddmPlaceholder, placeholder, 'placeholder')
+      setInputValue(ddmPlaceholder, placeholder, 'placeholder');
     }
 
     if (help) {
-      setInputValue(ddmTip, help, 'help')
+      setInputValue(ddmTip, help, 'help');
     }
 
     if (doAction && displayType === 'multiple') {
@@ -189,69 +191,69 @@ class FormView extends TestBase {
             .eq(1)
             .should('not.be.checked')
             .click()
-            .should('be.checked')
-        })
-      })
+            .should('be.checked');
+        });
+      });
     }
 
     if (options && options.length) {
       it('Typing [options]', () => {
         cy.get(ddmOptions).within(() => {
-          cy.get('.ddm-field-options').should('have.length', addField ? 2 : options.length + 1)
+          cy.get('.ddm-field-options').should('have.length', addField ? 2 : options.length + 1);
           options.forEach((option, index) => {
             cy.get('.ddm-field-options')
               .eq(index)
               .find('.form-group input')
               .eq(0)
               .clear()
-              .type(option)
-          })
-        })
-      })
+              .type(option);
+          });
+        });
+      });
     }
 
     if (required) {
-      setChecked(ddmRequired, 'required')
+      setChecked(ddmRequired, 'required');
     }
 
     if (showAsSwitcher) {
-      setChecked(ddmShowAsSwitcher, 'showAsSwitcher')
+      setChecked(ddmShowAsSwitcher, 'showAsSwitcher');
     }
 
     if (withAdvancedField) {
-      changeTab(1)
+      changeTab(1);
 
       it('Get the Name', () => {
         cy.get(`${this.selectors.ddmName} input`).then((doc) => {
-          field.config.id = doc.val()
-        })
-      })
+          field.config.id = doc.val();
+        });
+      });
 
       if (predefinedValue) {
-        setInputValue(ddmPredefinedValue, predefinedValue, 'predefinedValue')
+        setInputValue(ddmPredefinedValue, predefinedValue, 'predefinedValue');
       }
 
       if (repeatable) {
-        setChecked(ddmRepeatable, 'repeatable')
+        setChecked(ddmRepeatable, 'repeatable');
       }
 
       if (!showLabel) {
-        setUnchecked(ddmShowLabel, 'showLabel')
+        setUnchecked(ddmShowLabel, 'showLabel');
       }
 
       if (multiple) {
-        setChecked(ddmMultiple, 'multiple')
+        setChecked(ddmMultiple, 'multiple');
       }
 
       if (inline) {
-        setChecked(ddmInline, 'inline')
+        setChecked(ddmInline, 'inline');
       }
 
       if (predefinedOptions) {
         it(`Select the [predefinedValue] as ${predefinedOptions}`, () => {
-          cy.get(`${ddmPredefinedValue} .select-field-trigger`).click()
-          cy.get(`.dropdown-menu.show button[label="${predefinedOptions}"]`).click()
-        })
+          cy.get(`${ddmPredefinedValue} .select-field-trigger`).click();
+          cy.get(`.dropdown-menu.show button[label="${predefinedOptions}"]`).click();
+        });
       }
     }
   }
@@ -262,50 +264,50 @@ class FormView extends TestBase {
         cy
           .get('input')
           .should('be.empty')
-          .type(`Liferay FormView ${this.faker.random.number()}`)
-      })
-    })
+          .type(`Liferay FormView ${this.faker.random.number()}`);
+      });
+    });
 
     it('Verify if default language is en-US', () => {
-      cy.get('.localizable-dropdown .btn-section').contains(this.constants.languageId)
-    })
+      cy.get('.localizable-dropdown .btn-section').contains(this.constants.languageId);
+    });
   }
 
   sidebarLeft () {
     describe('Sidebar Left', () => {
       it('Object name should be shown', () => {
-        cy.get('.data-layout-builder-sidebar form h3').contains(this.config.object.name)
-      })
+        cy.get('.data-layout-builder-sidebar form h3').contains(this.config.object.name);
+      });
 
       it('Should show empty state', () => {
-        cy.get('.empty.sidebar-body').should('be.visible')
-      })
+        cy.get('.empty.sidebar-body').should('be.visible');
+      });
 
       this.config.formView.fieldTypes.map(({ name: field }, index) => {
         it(`Add ${field} on Sidebar`, () => {
-          cy.get('.custom-object-dropdown button').click()
+          cy.get('.custom-object-dropdown button').click();
 
           cy.get('.custom-object-dropdown-menu.show').within(() => {
-            cy.get('button').eq(index).click()
-          })
+            cy.get('button').eq(index).click();
+          });
 
           // cy.get('.sidebar-body .custom-object-field').eq(index).contains(field) // review logic
           // cy.get('div[data-field-name="label"] input').should('have.value', field)  // review logic
-        })
-      })
+        });
+      });
 
       it(`Should have ${this.config.formView.fieldTypes.length} Types on The List`, () => {
-        cy.get('.sidebar-body .custom-object-field').should('have.length', this.config.formView.fieldTypes.length)
-      })
+        cy.get('.sidebar-body .custom-object-field').should('have.length', this.config.formView.fieldTypes.length);
+      });
 
       it('Should search for Liferay and found nothing', () => {
         cy.get('.custom-object-sidebar-header').within(() => {
-          cy.get('button').eq(0).click()
-          cy.get('input').should('not.have.value').type('Liferay').should('have.value', 'Liferay').as('input-search')
-        })
+          cy.get('button').eq(0).click();
+          cy.get('input').should('not.have.value').type('Liferay').should('have.value', 'Liferay').as('input-search');
+        });
 
-        cy.get('.sidebar-body .custom-object-field').should('have.length', 0)
-      })
+        cy.get('.sidebar-body .custom-object-field').should('have.length', 0);
+      });
 
       // it(`Should search for ${firstFieldType.name} and found matching value`, () => {
       //   cy.get('.custom-object-sidebar-header input')
@@ -317,22 +319,22 @@ class FormView extends TestBase {
 
       it('Should back to list FieldTypes', () => {
         cy.get('.custom-object-sidebar-header').within(() => {
-          cy.get('button').eq(1).click()
-        })
-      })
+          cy.get('button').eq(1).click();
+        });
+      });
 
       it('Should remote all fields from object', () => {
-        this._deleteAllFieldsFromObject()
-      })
-    })
+        this.deleteAllFieldsFromObject();
+      });
+    });
   }
 
   submitForm () {
-    cy.get('.app-builder-upper-toolbar button.btn-primary').click()
+    cy.get('.app-builder-upper-toolbar button.btn-primary').click();
   }
 
   sidebarRight (parent = this.config.formView, isFieldSet) {
-    const fatherSelector = isFieldSet ? '.fieldset-modal' : ''
+    const fatherSelector = isFieldSet ? '.fieldset-modal' : '';
     describe('Sidebar Right', () => {
       it('Search for Liferay as Field and Found Nothing', () => {
         cy
@@ -341,12 +343,12 @@ class FormView extends TestBase {
           .as('search-input')
           .should('be.empty')
           .type('Liferay')
-          .should('have.value', 'Liferay')
-        cy.get('.tab-pane .field-type').should('not.exist')
-        cy.get('@search-input').clear()
-      })
+          .should('have.value', 'Liferay');
+        cy.get('.tab-pane .field-type').should('not.exist');
+        cy.get('@search-input').clear();
+      });
       // this.composeFields(parent, { fatherSelector })
-    })
+    });
   }
 
   // runPipeline () {
@@ -364,5 +366,3 @@ class FormView extends TestBase {
   //   })
   // }
 }
-
-module.exports = FormView

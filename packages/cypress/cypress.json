@@ -1,7 +1,7 @@
 {
     "viewportWidth": 1378,
     "viewportHeight": 820,
-    "testFiles": "**/*.spec.js",
+    "testFiles": "**/*.spec.ts",
     "experimentalNetworkStubbing": true,
     "reporterOptions": {
         "reportDir": "cypress/results",

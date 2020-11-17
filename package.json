@@ -1,30 +1,30 @@
 {
-    "name": "monorepo",
-    "version": "1.0.0",
-    "repository": "https://github.com/kevenleone/monorepo.git",
-    "author": "Keven <keven.santos.sz@gmail.com>",
-    "license": "MIT",
-    "private": true,
-    "scripts": {
-      "format": "eslint packages/**/src/* --ext .js --fix",
-      "test:cafe": "yarn workspace @monorepo/testcafe test",
-      "test:cypress": "yarn workspace @monorepo/cypress test",
-      "test:nightwatch": "yarn workspace @monorepo/nightwatch test",
-      "test:playwright": "yarn workspace @monorepo/playwright test",
-      "test:taiko": "yarn workspace @monorepo/taiko test",
-      "test": "jest"
-    },
-    "workspaces": {
-      "packages": [
-        "packages/*"
-      ]
-    },
-    "dependencies": {
-      "@monorepo/test-base": "*"
-    },
-    "devDependencies": {
-      "@monorepo/eslint-config-node": "*",
-      "jest": "^26.1.0"
-    }
+  "name": "monorepo",
+  "version": "1.0.0",
+  "repository": "https://github.com/kevenleone/monorepo.git",
+  "author": "Keven <keven.santos.sz@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "format": "eslint packages/**/src/* --ext .js --fix",
+    "test:cafe": "yarn workspace @monorepo/testcafe test",
+    "test:cypress": "yarn workspace @monorepo/cypress test",
+    "test:nightwatch": "yarn workspace @monorepo/nightwatch test",
+    "test:playwright": "yarn workspace @monorepo/playwright test",
+    "test:taiko": "yarn workspace @monorepo/taiko test",
+    "test": "jest"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "dependencies": {
+    "@monorepo/test-base": "*"
+  },
+  "devDependencies": {
+    "@monorepo/eslint-config-node": "*",
+    "jest": "^26.1.0",
+    "typescript": "^4.0.5"
   }
-  
+}

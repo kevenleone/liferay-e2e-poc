@@ -1,31 +1,35 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
     'cypress/globals': true,
-    es6: true,
+    es2020: true,
+    node: true,
   },
   extends: [
+    'plugin:react/recommended',
     'standard',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
     'prettier/standard',
-    'plugin:cypress/recommended'
+    'prettier/react',
+    'plugin:cypress/recommended',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
-    ecmaVersion: 2018
+    ecmaVersion: 11,
+    sourceType: 'module',
   },
   plugins: [
     'cypress',
-    'simple-import-sort',
+    'react',
+    '@typescript-eslint',
     'prettier',
+    'simple-import-sort',
     'sort-destructure-keys',
-    'sort-keys-fix'
+    'sort-keys-fix',
   ],
   rules: {
     'cypress/assertion-before-screenshot': 'warn',
@@ -33,8 +37,28 @@ module.exports = {
     'cypress/no-async-tests': 'error',
     'cypress/no-force': 'warn',
     'cypress/no-unnecessary-waiting': 'error',
-    'max-len': ['error', { code: 80 }],
+    camelcase: 'off',
+    'no-explicit-any': 'off',
+    'react/display-name': 'off',
+    semi: ['error', 'always'],
     'simple-import-sort/sort': 'error',
-    'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: false }],
-    'sort-keys': ['error', 'asc', { caseSensitive: true, natural: false, minKeys: 2 }]  }
-}
+    'sort-destructure-keys/sort-destructure-keys': [
+      2,
+      { caseSensitive: false },
+    ],
+    'sort-keys': [
+      'error',
+      'asc',
+      { caseSensitive: true, minKeys: 2, natural: false },
+    ],
+    'sort-keys-fix/sort-keys-fix': 'warn',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+    react: {
+      version: 'detect',
+    },
+  },
+};
