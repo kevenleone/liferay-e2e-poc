@@ -15,5 +15,11 @@ declare namespace Cypress {
      * @example cy.login(`test@liferay.com`, `test`)
      */
     login(email?: string, password?: string): Chainable<Element>;
+
+    /**
+     * Custom command to deal with xpaths.
+     * @example cy.xpath(`//ul[@class="todo-list"]//li`)
+     */
+    xpath(path: string): Chainable<Element>
   }
 }

@@ -1,14 +1,19 @@
-import faker from 'faker';
+import * as faker from 'faker';
 
 import { CustomObjectTypes, LocalizableValue } from './interfaces';
 
 export default class TestBase {
-  public faker: Faker.FakerStatic;
-  public defaultTime: number;
+  private constants: any;
+  protected faker: Faker.FakerStatic;
+  protected defaultTime: number;
 
   constructor () {
-    this.faker = faker;
+    this.constants = {
+      applicationMenuNav: '.control-menu-nav',
+      iconLeftAngle: '.lexicon-icon-angle-left'
+    };
     this.defaultTime = 1000;
+    this.faker = faker;
   }
 
   preserve (): void {
@@ -23,6 +28,15 @@ export default class TestBase {
         'COOKIE_SUPPORT'
       ]
     });
+  }
+
+  public goBackApplicationBar (): void {
+    const { applicationMenuNav, iconLeftAngle } = this.constants;
+    cy.get(`${applicationMenuNav} ${iconLeftAngle}`).parent().click();
+  }
+
+  getTableRows (): Cypress.Chainable {
+    return cy.get('tbody>tr');
   }
 
   changeObjectTab (index: CustomObjectTypes): void {
@@ -133,11 +147,11 @@ export default class TestBase {
 
     cy.wait(this.defaultTime);
 
-    cy.get('form input')
+    cy.get('[placeholder="Search..."]')
       .eq(0)
       .should('not.have.value')
       .type(`${localizedValue}{enter}`)
-      .should('have.value', localizedValue)
+      // .should('have.value', localizedValue)
       .as('input');
 
     cy.get('.tbar-section')
@@ -149,8 +163,7 @@ export default class TestBase {
 
     cy.get('@input')
       .clear()
-      .type(`${fakeCompany} {enter}`)
-      .should('have.value', fakeCompany);
+      .type(`${fakeCompany} {enter}`);
 
     cy.get('@section').should('be.visible').contains(fakeCompany);
 

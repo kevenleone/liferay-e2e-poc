@@ -1,4 +1,5 @@
 import App from '../app';
+import Entry from '../entry';
 import FormView from '../form-view';
 import ObjectModule from '../object';
 import Portal from '../portal';
@@ -12,15 +13,24 @@ class TestRunner {
   public tableView: TableView;
   public portal: Portal;
   public object: ObjectModule;
+  public Entry: Entry
 
   constructor (config: Config) {
     this.defaultTime = 1000;
-
     this.app = new App(config);
     this.formView = new FormView();
     this.tableView = new TableView(config);
     this.portal = new Portal();
     this.object = new ObjectModule();
+    this.Entry = new Entry(config);
+  }
+
+  private beforeAllTest () {
+    this.keepCookies([]);
+    Cypress.LocalStorage.clear();
+    cy.clearCookies({ log: true });
+    cy.clearLocalStorage({ log: true });
+    cy.visit('http://localhost:8080');
   }
 
   private keepCookies (cookies: Array<string>) {
@@ -29,7 +39,7 @@ class TestRunner {
     });
   }
 
-  preserve (): void {
+  public preserve (): void {
     this.keepCookies([
       'JSESSIONID',
       'LFR_SESSION_STATE_20126',
@@ -41,15 +51,7 @@ class TestRunner {
     ]);
   }
 
-  private beforeAllTest () {
-    this.keepCookies([]);
-    Cypress.LocalStorage.clear();
-    cy.clearCookies({ log: true });
-    cy.clearLocalStorage({ log: true });
-    cy.visit('http://localhost:8080');
-  }
-
-  teardown () {
+  public teardown (): void {
     cy.log('Running teardown and cleaning cookies, localstorage');
     this.beforeAllTest();
   }
