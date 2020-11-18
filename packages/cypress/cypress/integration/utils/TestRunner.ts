@@ -8,20 +8,20 @@ import { Config } from './interfaces';
 
 class TestRunner {
   public defaultTime: number;
-  public app: App;
-  public formView: FormView;
-  public tableView: TableView;
-  public portal: Portal;
-  public object: ObjectModule;
+  public App: App;
+  public FormView: FormView;
+  public TableView: TableView;
+  public Portal: Portal;
+  public Object: ObjectModule;
   public Entry: Entry
 
   constructor (config: Config) {
     this.defaultTime = 1000;
-    this.app = new App(config);
-    this.formView = new FormView();
-    this.tableView = new TableView(config);
-    this.portal = new Portal();
-    this.object = new ObjectModule();
+    this.App = new App(config);
+    this.FormView = new FormView();
+    this.TableView = new TableView(config);
+    this.Portal = new Portal();
+    this.Object = new ObjectModule();
     this.Entry = new Entry(config);
   }
 

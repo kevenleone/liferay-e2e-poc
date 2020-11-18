@@ -19,16 +19,18 @@ export default class Entry extends TestBase {
     };
   }
 
-  public getFieldByLabel (fieldName: string): Cypress.Chainable {
-    return cy.xpath(`//label[contains(text(), '${fieldName}')]`).parent();
+  public addEntry (): void {
+    cy.get(this.selectors.newItem).click();
   }
 
-  public getSpanByName (name: string): Cypress.Chainable {
-    return cy.xpath(`//span[contains(text(), '${name}')]`);
-  }
-
-  public openEditPage (): void {
-    cy.get(this.selectors.editIcon).parent().click();
+  public deleteAllEntries (): void {
+    cy.get('tbody tr').each(() => {
+      cy.wait(this.defaultTime / 2);
+      cy.get('tbody tr:nth-child(1) .dropdown-action').click();
+      cy.get('.dropdown-menu.show').within(() => {
+        cy.get('button').last().click();
+      });
+    });
   }
 
   public fillForm (): void {
@@ -42,8 +44,16 @@ export default class Entry extends TestBase {
       });
   }
 
-  public addEntry (): void {
-    cy.get(this.selectors.newItem).click();
+  public getFieldByLabel (fieldName: string): Cypress.Chainable {
+    return cy.xpath(`//label[contains(text(), '${fieldName}')]`).parent();
+  }
+
+  public getSpanByName (name: string): Cypress.Chainable {
+    return cy.xpath(`//span[contains(text(), '${name}')]`);
+  }
+
+  public openEditPage (): void {
+    cy.get(this.selectors.editIcon).parent().click();
   }
 
   public openEntryDetail (entryIndex: number): void {
@@ -59,12 +69,36 @@ export default class Entry extends TestBase {
     });
   }
 
-  public deleteAllEntries (): void {
-    cy.get('tbody tr').each(() => {
-      cy.wait(this.defaultTime);
-      cy.get('tbody tr:nth-child(1) .dropdown-action').click();
-      cy.get('.dropdown-menu.show').within(() => {
-        cy.get('button').last().click();
+  pipeline (): void {
+    describe('Validate Standalone Home Screen', () => {
+      const appName = this.getLocalizedValue(this.config.app.name);
+      const locale = this.getLanguageId().toLowerCase();
+
+      it(`Should have [${appName}] on Standalone name`, () => {
+        cy.get('.app-builder-standalone-name').contains(appName);
+      });
+
+      it('Should have empty state', () => {
+        this.emptyState();
+      });
+
+      it(`Translation Manager should have default value as [${locale}]`, () => {
+        cy.get('.app-builder-standalone-translation-manager svg').should(
+          'have.class',
+          `lexicon-icon lexicon-icon-${locale.toLowerCase()}`
+        );
+      });
+
+      it('Should open Add Entry Page', () => {
+        cy.get(this.selectors.newItem).click();
+      });
+    });
+
+    this.fillForm();
+
+    describe('Submit Entries', () => {
+      it('Should submit entry', () => {
+        this.submit();
       });
     });
   }
@@ -191,45 +225,5 @@ export default class Entry extends TestBase {
         }
       });
     }
-  }
-
-  pipeline (): void {
-    describe('Validate Standalone Home Screen', () => {
-      const appName = this.getLocalizedValue(this.config.app.name);
-      const locale = this.getLanguageId().toLowerCase();
-
-      it(`Should have [${appName}] on Standalone name`, () => {
-        cy.get('.app-builder-standalone-name').contains(appName);
-      });
-
-      it('Should have empty state', () => {
-        this.emptyState();
-      });
-
-      it(`Translation Manager should have default value as [${locale}]`, () => {
-        cy.get('.app-builder-standalone-translation-manager svg').should(
-          'have.class',
-          `lexicon-icon lexicon-icon-${locale.toLowerCase()}`
-        );
-      });
-
-      it('Should open Add Entry Page', () => {
-        cy.get(this.selectors.newItem).click();
-      });
-    });
-
-    this.fillForm();
-
-    describe('Submit Entries', () => {
-      it('Should submit entry', () => {
-        this.submit();
-      });
-    });
-
-    describe('Validate Standalone Home Screen', () => {
-      it('Table Values are fine', () => {
-        // this.validateListView()
-      });
-    });
   }
 }

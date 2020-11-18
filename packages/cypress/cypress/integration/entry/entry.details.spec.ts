@@ -20,7 +20,6 @@ class ViewEntryDetails extends TestRunner {
 
       beforeEach(() => {
         this.preserve();
-        cy.wait(this.defaultTime / 10);
       });
 
       describe('Object Page', () => {
@@ -29,41 +28,41 @@ class ViewEntryDetails extends TestRunner {
         });
 
         it('Visit App Builder Object', () => {
-          this.object.visit();
+          this.Object.visit();
         });
 
         it('Delete all existing Objects', () => {
-          this.object.deleteAllObjects();
+          this.Object.deleteAllObjects();
         });
 
         it('Create an Object', () => {
-          this.object.createAnObject(this.config.object.name);
+          this.Object.createAnObject(this.config.object.name);
         });
       });
 
       describe('FormView Page', () => {
-        this.formView.composeFields(this.config.formView.fieldTypes, {
+        this.FormView.composeFields(this.config.formView.fieldTypes, {
           addField: true,
           doAction: true
         });
 
         describe('Save it', () => {
           it('Set title', () => {
-            this.formView.setTitle(this.config.formView.name['en-US']);
+            this.FormView.setTitle(this.config.formView.name['en-US']);
           });
 
           it('Save', () => {
-            this.formView.submit();
+            this.FormView.submit();
           });
         });
       });
 
       describe('TableView Page', () => {
-        this.tableView.pipeline();
+        this.TableView.pipeline();
       });
 
       describe('App Page', () => {
-        this.app.pipeline();
+        this.App.pipeline(false);
       });
 
       describe('Application Page', () => {
@@ -85,11 +84,11 @@ class ViewEntryDetails extends TestRunner {
 
         describe('Should Open Application and Application', () => {
           it('Go to home', () => {
-            this.portal.visit();
+            this.Portal.visit();
           });
 
           it('Open Menu', () => {
-            this.portal.openApplicationMenu();
+            this.Portal.openApplicationMenu();
           });
 
           it('Open Application Menu App', () => {
@@ -123,7 +122,7 @@ class ViewEntryDetails extends TestRunner {
             this.Entry.getSpanByName(secondValue).should('exist');
           });
 
-          it('Validate ListView', () => {
+          xit('Validate ListView', () => {
             this.Entry.validateListView({ 'en-US': firstValue });
           });
         });

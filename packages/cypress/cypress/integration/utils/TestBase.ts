@@ -16,29 +16,6 @@ export default class TestBase {
     this.faker = faker;
   }
 
-  preserve (): void {
-    Cypress.Cookies.defaults({
-      preserve: [
-        'JSESSIONID',
-        'LFR_SESSION_STATE_20126',
-        'SCREEN_NAME',
-        'COMPANY_ID',
-        'GUEST_LANGUAGE_ID',
-        'LFR_SESSION_STATE_20103',
-        'COOKIE_SUPPORT'
-      ]
-    });
-  }
-
-  public goBackApplicationBar (): void {
-    const { applicationMenuNav, iconLeftAngle } = this.constants;
-    cy.get(`${applicationMenuNav} ${iconLeftAngle}`).parent().click();
-  }
-
-  getTableRows (): Cypress.Chainable {
-    return cy.get('tbody>tr');
-  }
-
   changeObjectTab (index: CustomObjectTypes): void {
     cy.wait(this.defaultTime)
       .get('.custom-object-app .nav-item')
@@ -46,7 +23,66 @@ export default class TestBase {
       .click();
   }
 
-  selectLanguage (lang: string, force = false): void {
+  chooseAnOption (value: string): void {
+    cy.get('.dropdown-menu.show').within(() => {
+      cy.get('button').contains(value).click();
+    });
+  }
+
+  getFakeValueByType (type: string): string | number {
+    switch (type) {
+      case 'text': {
+        return this.faker.system.fileName();
+      }
+      case 'date': {
+        // return '19/02/1996'
+        return this.faker.date.recent(3).toISOString();
+      }
+      case 'numeric': {
+        return this.faker.random.number(120);
+      }
+      default: {
+        return this.faker.address.city();
+      }
+    }
+  }
+
+  public getLocalizedPrefenceValue (
+    name: LocalizableValue,
+    defaultLanguageId = this.getDefaultLanguageId()
+  ): string {
+    if (name[defaultLanguageId]) {
+      return name[defaultLanguageId];
+    }
+    return this.getLocalizedValue(name);
+  }
+
+  public getLanguageId (): string {
+    return 'en-US';
+  }
+
+  public getDefaultLanguageId (): string {
+    return 'en-US';
+  }
+
+  public getLocalizedValue (name: LocalizableValue, untitled = ''): string {
+    return (
+      name[this.getLanguageId()] ||
+      name[this.getDefaultLanguageId()] ||
+      untitled
+    );
+  }
+
+  public getTableRows (): Cypress.Chainable {
+    return cy.get('tbody>tr');
+  }
+
+  public goBackApplicationBar (): void {
+    const { applicationMenuNav, iconLeftAngle } = this.constants;
+    cy.get(`${applicationMenuNav} ${iconLeftAngle}`).parent().click();
+  }
+
+  public selectLanguage (lang: string, force = false): void {
     it('Select language', () => {
       cy.get('.app-builder-root').within(() => {
         cy.get('.localizable-dropdown button').click();
@@ -58,41 +94,18 @@ export default class TestBase {
     });
   }
 
-  normalizeLang (lang: string): string {
+  public normalizeLang (lang: string): string {
     return lang.replace('_', '-').toLowerCase();
   }
 
-  getLocalizedValue (name: LocalizableValue, untitled = ''): string {
-    return (
-      name[this.getLanguageId()] ||
-      name[this.getDefaultLanguageId()] ||
-      untitled
-    );
-  }
-
-  getLocalizedPrefenceValue (
-    name: LocalizableValue,
-    defaultLanguageId = this.getDefaultLanguageId()
-  ): string {
-    if (name[defaultLanguageId]) {
-      return name[defaultLanguageId];
-    }
-    return this.getLocalizedValue(name);
-  }
-
-  getLanguageId (): string {
-    return 'en-US';
-  }
-
-  getDefaultLanguageId (): string {
-    return 'en-US';
-  }
-
-  emptyState (): void {
+  public emptyState (): void {
     cy.get('.taglib-empty-result-message').should('be.visible');
   }
 
-  getLocalizedConfig (config = {}, lang = this.getDefaultLanguageId()): any {
+  public getLocalizedConfig (
+    config = {},
+    lang = this.getDefaultLanguageId()
+  ): any {
     const newConfigs = {
       ...config
     };
@@ -109,7 +122,7 @@ export default class TestBase {
     return newConfigs;
   }
 
-  managementTitle (name: LocalizableValue): void {
+  public managementTitle (name: LocalizableValue): void {
     const defaultLanguageId = this.getDefaultLanguageId();
     const normalizeLang = (lang) => lang.replace('_', '-').toLowerCase();
     const selectLanguage = (lang, force = false) => {
@@ -141,9 +154,9 @@ export default class TestBase {
     }
   }
 
-  validateListView (name: LocalizableValue): void {
+  public validateListView (name: LocalizableValue): void {
     const localizedValue = this.getLocalizedPrefenceValue(name);
-    const fakeCompany = 'Liferay INC';
+    const fakeCompany = this.faker.company.companyName();
 
     cy.wait(this.defaultTime);
 
@@ -161,38 +174,12 @@ export default class TestBase {
 
     cy.get('tbody tr').should('have.length', 1).as('row');
 
-    cy.get('@input')
-      .clear()
-      .type(`${fakeCompany} {enter}`);
+    cy.get('@input').clear().type(`${fakeCompany} {enter}`);
 
     cy.get('@section').should('be.visible').contains(fakeCompany);
 
     this.emptyState();
 
     cy.get('@section').find('button').click({ force: true });
-  }
-
-  chooseAnOption (value: string): void {
-    cy.get('.dropdown-menu.show').within(() => {
-      cy.get('button').contains(value).click();
-    });
-  }
-
-  getFakeValueByType (type: string): string | number {
-    switch (type) {
-      case 'text': {
-        return this.faker.system.fileName();
-      }
-      case 'date': {
-        // return '19/02/1996'
-        return this.faker.date.recent(3).toISOString();
-      }
-      case 'numeric': {
-        return this.faker.random.number(120);
-      }
-      default: {
-        return this.faker.address.city();
-      }
-    }
   }
 }

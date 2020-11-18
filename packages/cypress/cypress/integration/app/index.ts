@@ -13,30 +13,6 @@ export default class App extends TestBase {
     };
   }
 
-  private validateCreatedItemInForm (item?) {
-    if (item) {
-      const value =
-        item[this.getLanguageId()] || item[this.getDefaultLanguageId()];
-      const fakeValue = 'keven';
-      cy.get(this.selectors.primaryButton).should('be.disabled');
-      cy.get('tbody tr').as('row').should('have.length', 1);
-      cy.get('.input-group-item input')
-        .eq(1)
-        .as('search')
-        .should('not.have.value')
-        .type(fakeValue);
-
-      cy.get('@row').should('not.exist');
-
-      this.emptyState();
-
-      cy.get('@search').should('have.value', fakeValue).clear().type(value);
-    }
-
-    cy.get('tbody tr').eq(0).click();
-    cy.get(this.selectors.primaryButton).click();
-  }
-
   private deployAs (options = {}) {
     cy.get(this.selectors.primaryButton).should('be.disabled');
 
@@ -109,7 +85,7 @@ export default class App extends TestBase {
         });
     });
 
-    it('Validate ListView', () => {
+    xit('Validate ListView', () => {
       this.validateListView(name);
     });
 
@@ -118,5 +94,29 @@ export default class App extends TestBase {
         cy.visit(standaloneApp);
       });
     }
+  }
+
+  private validateCreatedItemInForm (item?) {
+    if (item) {
+      const value =
+        item[this.getLanguageId()] || item[this.getDefaultLanguageId()];
+      const fakeValue = 'keven';
+      cy.get(this.selectors.primaryButton).should('be.disabled');
+      cy.get('tbody tr').as('row').should('have.length', 1);
+      cy.get('.input-group-item input')
+        .eq(1)
+        .as('search')
+        .should('not.have.value')
+        .type(fakeValue);
+
+      cy.get('@row').should('not.exist');
+
+      this.emptyState();
+
+      cy.get('@search').should('have.value', fakeValue).clear().type(value);
+    }
+
+    cy.get('tbody tr').eq(0).click();
+    cy.get(this.selectors.primaryButton).click();
   }
 }

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const { constants, selectors } = require('@monorepo/test-base');
+import { constants, selectors } from '@monorepo/test-base';
 const {
   homePage,
   login: { emailInput, loginButton, loginLink, passwordInput },
@@ -29,9 +29,7 @@ describe('Open Liferay', () => {
   });
 
   it('Fazer Login', () => {
-    cy
-      .get(loginLink)
-      .click();
+    cy.get(loginLink).click();
 
     cy.get(emailInput)
       .should('have.value', '@liferay.com')
@@ -39,15 +37,12 @@ describe('Open Liferay', () => {
       .type(email)
       .should('have.value', email);
 
-    cy
-      .get(passwordInput)
+    cy.get(passwordInput)
       .should('not.have.value')
       .type(password)
       .should('have.value', password);
 
-    cy.get(loginButton)
-      .should('be.enabled')
-      .click();
+    cy.get(loginButton).should('be.enabled').click();
   });
 
   it('Página de Bem Vindo (Usuário Logado)', () => {
@@ -56,21 +51,15 @@ describe('Open Liferay', () => {
 
   describe('Simulações de tela', () => {
     beforeEach(() => {
-      cy
-        .get('.product-menu.sidebar.sidebar-inverse')
-        .as('sidebar');
+      cy.get('.product-menu.sidebar.sidebar-inverse').as('sidebar');
     });
 
     it('Abrir simulador de telas', () => {
-      cy.get('@sidebar')
-        .should('not.be.visible');
+      cy.get('@sidebar').should('not.be.visible');
 
       cy.wait(100);
 
-      cy
-        .get(simulatorSelector.openSimulation)
-        .parent()
-        .click();
+      cy.get(simulatorSelector.openSimulation).parent().click();
 
       cy.get('@sidebar').should('be.visible');
     });
@@ -80,11 +69,13 @@ describe('Open Liferay', () => {
     });
 
     it('Executar a simulação em diversos viewports', () => {
-      cy.get('.default-devices button').should('have.length', 5).each((button, index) => {
-        const actualButton = constants.buttons[index];
-        cy.get(button).as('button').click();
-        cy.get('@button').contains(actualButton);
-      });
+      cy.get('.default-devices button')
+        .should('have.length', 5)
+        .each((button, index) => {
+          const actualButton = constants.buttons[index];
+          cy.get(button).as('button').click();
+          cy.get('@button').contains(actualButton);
+        });
 
       cy.get(simulatorSelector.height)
         .should('have.value', simulatorConstant.defaultValue)

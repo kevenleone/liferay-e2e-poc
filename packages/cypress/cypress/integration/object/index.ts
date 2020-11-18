@@ -40,7 +40,7 @@ export default class ObjectModule {
 
   deleteAllObjects (): void {
     cy.get('tbody tr').each(() => {
-      cy.wait(this.defaultTime);
+      cy.wait(this.defaultTime / 2);
       cy.get('tbody tr:nth-child(1) .dropdown-action').click();
       cy.get('.dropdown-menu.show').within(() => {
         cy.get('button').eq(5).click();

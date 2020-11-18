@@ -4,7 +4,7 @@ export const EntryDetailsConfig = {
   app: {
     config: { product: true, standalone: true, widget: false },
     name: {
-      'en-US': 'Vacation Request - LATAM'
+      'en-US': 'My Custom App'
     }
   },
   formView: {
@@ -15,7 +15,7 @@ export const EntryDetailsConfig = {
           repeatable: false,
           required: false,
           showLabel: true,
-          value: faker.system.fileName()
+          value: `${faker.name.firstName()} ${faker.name.lastName()}`
         },
         name: 'Text',
         type: 'text'
@@ -23,26 +23,22 @@ export const EntryDetailsConfig = {
       {
         config: {
           dragType: 'dragBottom',
-          label: { 'en-US': 'Departament', 'pt-BR': 'Departamento' },
-          options: [
-            { 'en-US': 'Human Resources', 'pt-BR': 'Recursos Humanos' },
-            { 'en-US': 'Engineering', 'pt-BR': 'Engenharia' }
-          ],
+          label: { 'en-US': 'Nickname', 'pt-BR': 'Apelido' },
           repeatable: false,
           required: true,
           showLabel: true,
-          value: 'Engineering'
+          value: faker.internet.userName()
         },
-        name: 'Select from List',
-        type: 'select'
+        name: 'Text',
+        type: 'text'
       }
     ],
-    name: { 'en-US': 'Vacation Request' }
+    name: { 'en-US': 'My Registration Form' }
   },
-  object: { name: 'Vacation Request' },
+  object: { name: 'My Custom Object' },
   tableView: {
     name: {
-      'en-US': 'Vacation Request - LATAM'
+      'en-US': 'My Registration Table'
     },
     selectedFields: [
       { label: 'Full Name', value: 'Full Name' },

@@ -108,7 +108,7 @@ export default class TableView extends TestBase {
         cy.get('.btn-primary').click();
       });
 
-      it('Validate ListView', () => {
+      xit('Validate ListView', () => {
         this.validateListView(name);
       });
     });
