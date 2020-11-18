@@ -5,5 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "faker": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/faker": "^5.1.4"
   }
 }

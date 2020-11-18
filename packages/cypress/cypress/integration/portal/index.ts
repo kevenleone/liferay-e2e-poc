@@ -2,7 +2,7 @@
 
 import TestBase from '../utils/TestBase';
 
-export default class SignInPage extends TestBase {
+export default class Portal extends TestBase {
   private selectors: any;
 
   constructor () {
@@ -16,15 +16,15 @@ export default class SignInPage extends TestBase {
     };
   }
 
-  openApplicationMenu () {
+  openApplicationMenu (): void {
     cy.get(this.selectors.applicationMenu).click();
   }
 
-  visit () {
+  visit (): void {
     cy.visit('http://localhost:8080');
   }
 
-  signIn (email = 'test@liferay.com', password = 'test') {
+  signIn (email = 'test@liferay.com', password = 'test'): void {
     const { emailInput, passwordInput, signIn, submitButton } = this.selectors;
 
     cy.get(signIn).click();
@@ -40,7 +40,7 @@ export default class SignInPage extends TestBase {
     cy.get(submitButton).click();
   }
 
-  test () {
+  test (): void {
     describe('Open Portal and Sign In', () => {
       it('Open Home', () => {
         this.visit();

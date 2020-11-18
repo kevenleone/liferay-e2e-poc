@@ -1,4 +1,4 @@
-interface LocalizableValue {
+export interface LocalizableValue {
     'en-US'?: string;
     'ar-SA'?: string;
     'ca-ES'?: string;
@@ -40,13 +40,19 @@ interface TableView extends Localizable {
     selectedFields: SelectedFields[]
 }
 
-type IObject = Localizable
+interface IObject {
+    name: string;
+}
 
-interface Config {
+export interface Config {
     app: App;
     formView: FormView;
     tableView: TableView;
     object: IObject
 }
 
-export { Config };
+export enum CustomObjectTypes {
+    FormView,
+    TableView,
+    App
+}

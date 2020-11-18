@@ -23,18 +23,35 @@ class TestRunner {
     this.object = new ObjectModule();
   }
 
-  preserve (): void {
+  private keepCookies (cookies: Array<string>) {
     Cypress.Cookies.defaults({
-      preserve: [
-        'JSESSIONID',
-        'LFR_SESSION_STATE_20126',
-        'SCREEN_NAME',
-        'COMPANY_ID',
-        'GUEST_LANGUAGE_ID',
-        'LFR_SESSION_STATE_20103',
-        'COOKIE_SUPPORT'
-      ]
+      preserve: cookies
     });
+  }
+
+  preserve (): void {
+    this.keepCookies([
+      'JSESSIONID',
+      'LFR_SESSION_STATE_20126',
+      'SCREEN_NAME',
+      'COMPANY_ID',
+      'GUEST_LANGUAGE_ID',
+      'LFR_SESSION_STATE_20103',
+      'COOKIE_SUPPORT'
+    ]);
+  }
+
+  private beforeAllTest () {
+    this.keepCookies([]);
+    Cypress.LocalStorage.clear();
+    cy.clearCookies({ log: true });
+    cy.clearLocalStorage({ log: true });
+    cy.visit('http://localhost:8080');
+  }
+
+  teardown () {
+    cy.log('Running teardown and cleaning cookies, localstorage');
+    this.beforeAllTest();
   }
 }
 

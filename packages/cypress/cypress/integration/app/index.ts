@@ -1,4 +1,4 @@
-import { Config } from '../utils/interfaces';
+import { Config, CustomObjectTypes } from '../utils/interfaces';
 import TestBase from '../utils/TestBase';
 
 export default class App extends TestBase {
@@ -15,7 +15,8 @@ export default class App extends TestBase {
 
   private validateCreatedItemInForm (item?) {
     if (item) {
-      const value = item[this.getLanguageId()] || item[this.getDefaultLanguageId()];
+      const value =
+        item[this.getLanguageId()] || item[this.getDefaultLanguageId()];
       const fakeValue = 'keven';
       cy.get(this.selectors.primaryButton).should('be.disabled');
       cy.get('tbody tr').as('row').should('have.length', 1);
@@ -25,15 +26,11 @@ export default class App extends TestBase {
         .should('not.have.value')
         .type(fakeValue);
 
-      cy.get('@row')
-        .should('not.exist');
+      cy.get('@row').should('not.exist');
 
       this.emptyState();
 
-      cy.get('@search')
-        .should('have.value', fakeValue)
-        .clear()
-        .type(value);
+      cy.get('@search').should('have.value', fakeValue).clear().type(value);
     }
 
     cy.get('tbody tr').eq(0).click();
@@ -65,9 +62,13 @@ export default class App extends TestBase {
   }
 
   pipeline (openStandalone = true): void {
-    const { app: { config, name }, formView: { name: formViewName }, tableView: { name: tableViewName } } = this.config;
+    const {
+      app: { config, name },
+      formView: { name: formViewName },
+      tableView: { name: tableViewName }
+    } = this.config;
     it('Should open [App] Tab', () => {
-      this.changeObjectTab(2);
+      this.changeObjectTab(CustomObjectTypes.App);
     });
 
     it('Should contains an empty state', () => {
@@ -102,9 +103,10 @@ export default class App extends TestBase {
 
     it('Should save the App with sucesss', () => {
       cy.get(this.selectors.primaryButton).should('be.enabled').click();
-      cy.get('.alert-container .alert-notifications a').then(doc => {
-        standaloneApp = doc[0].href;
-      });
+      cy.get('.alert-container .alert-notifications a').then(
+        (doc: Cypress.ObjectLike) => {
+          standaloneApp = doc[0].href;
+        });
     });
 
     it('Validate ListView', () => {

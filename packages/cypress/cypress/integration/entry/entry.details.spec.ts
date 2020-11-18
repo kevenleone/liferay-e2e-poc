@@ -5,8 +5,7 @@ const testConfig = {
   app: {
     config: { product: true, standalone: true, widget: false },
     name: {
-      'en-US': 'Vacation Request - LATAM',
-      'pt-BR': 'Solicitação de Férias - LATAM'
+      'en-US': 'Vacation Request - LATAM'
     }
   },
   formView: {
@@ -38,13 +37,12 @@ const testConfig = {
         type: 'select'
       }
     ],
-    name: { 'en-US': 'Vacation Request', 'pt-BR': 'Solicitação de Férias' }
+    name: { 'en-US': 'Vacation Request' }
   },
   object: { name: 'Vacation Request' },
   tableView: {
     name: {
-      'en-US': 'Vacation Request - LATAM',
-      'pt-BR': 'Solicitação de Férias - LATAM'
+      'en-US': 'Vacation Request - LATAM'
     },
     selectedFields: [
       { label: 'Full Name', value: 'Full Name' },
@@ -65,48 +63,55 @@ class ViewEntryDetails extends TestRunner {
 
   test () {
     describe('ViewEntryDetails', () => {
-      this.portal.test();
+      before(() => {
+        // this.teardown();
+        // cy.login();
+      });
 
       beforeEach(() => {
         this.preserve();
         cy.wait(this.defaultTime / 10);
       });
 
-      describe('Object', () => {
-        it('Visit App Builder Object', () => {
-          this.object.visit();
-        });
+      // describe('Object', () => {
+      //   before(() => {
+      //     cy.wait(this.defaultTime);
+      //   });
 
-        it('Delete all existing Objects', () => {
-          this.object.deleteAllObjects();
-        });
+      //   it('Visit App Builder Object', () => {
+      //     this.object.visit();
+      //   });
 
-        it('Create an Object', () => {
-          this.object.createAnObject('Testando');
-        });
-      });
+      //   it('Delete all existing Objects', () => {
+      //     this.object.deleteAllObjects();
+      //   });
 
-      describe('FormView', () => {
-        this.formView.composeFields(this.config.formView.fieldTypes, {});
+      //   it('Create an Object', () => {
+      //     this.object.createAnObject(this.config.object.name);
+      //   });
+      // });
 
-        describe('Save it', () => {
-          it('Set title', () => {
-            this.formView.setTitle(this.config.formView.name['en-US']);
-          });
+      // describe('FormView', () => {
+      //   this.formView.composeFields(this.config.formView.fieldTypes, {});
 
-          it('Save', () => {
-            this.formView.submitForm();
-          });
-        });
-      });
+      //   describe('Save it', () => {
+      //     it('Set title', () => {
+      //       this.formView.setTitle(this.config.formView.name['en-US']);
+      //     });
 
-      describe('TableView', () => {
-        this.tableView.pipeline();
-      });
+      //     it('Save', () => {
+      //       this.formView.submitForm();
+      //     });
+      //   });
+      // });
 
-      describe('App', () => {
-        this.app.pipeline();
-      });
+      // describe('TableView', () => {
+      //   this.tableView.pipeline();
+      // });
+
+      // describe('App', () => {
+      //   this.app.pipeline();
+      // });
 
       describe('Application Menu', () => {
         it('Go to home', () => {
@@ -118,9 +123,7 @@ class ViewEntryDetails extends TestRunner {
         });
 
         it('Open Application Menu App', () => {
-          cy.visit(
-            'http://localhost:8080/group/control_panel/manage?p_p_id=com_liferay_app_builder_web_internal_portlet_ProductMenuAppPortlet_39533applications&p_p_lifecycle=0&p_p_state=maximized&p_v_l_s_g_id=20121&p_p_auth=sOz3SkYS#/'
-          );
+          cy.xpath(`//span[contains(text(), '${this.config.app.name['en-US']}')]`).click();
         });
       });
     });

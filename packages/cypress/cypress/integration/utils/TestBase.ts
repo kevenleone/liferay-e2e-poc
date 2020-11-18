@@ -1,15 +1,17 @@
 import faker from 'faker';
 
+import { CustomObjectTypes, LocalizableValue } from './interfaces';
+
 export default class TestBase {
-  public faker: any;
-  public defaultTime: any;
+  public faker: Faker.FakerStatic;
+  public defaultTime: number;
 
   constructor () {
     this.faker = faker;
     this.defaultTime = 1000;
   }
 
-  preserve () {
+  preserve (): void {
     Cypress.Cookies.defaults({
       preserve: [
         'JSESSIONID',
@@ -23,15 +25,14 @@ export default class TestBase {
     });
   }
 
-  changeObjectTab (index) {
-    cy
-      .wait(this.defaultTime)
+  changeObjectTab (index: CustomObjectTypes): void {
+    cy.wait(this.defaultTime)
       .get('.custom-object-app .nav-item')
       .eq(index)
       .click();
   }
 
-  selectLanguage (lang, force = false) {
+  selectLanguage (lang: string, force = false): void {
     it('Select language', () => {
       cy.get('.app-builder-root').within(() => {
         cy.get('.localizable-dropdown button').click();
@@ -43,41 +44,50 @@ export default class TestBase {
     });
   }
 
-  normalizeLang (lang) {
+  normalizeLang (lang: string): string {
     return lang.replace('_', '-').toLowerCase();
   }
 
-  getLocalizedValue (name, untitled = '') {
-    return name[this.getLanguageId()] || name[this.getDefaultLanguageId()] || untitled;
+  getLocalizedValue (name: LocalizableValue, untitled = ''): string {
+    return (
+      name[this.getLanguageId()] ||
+      name[this.getDefaultLanguageId()] ||
+      untitled
+    );
   }
 
-  getLocalizedPrefenceValue (name, defaultLanguageId = this.getDefaultLanguageId()) {
+  getLocalizedPrefenceValue (
+    name: LocalizableValue,
+    defaultLanguageId = this.getDefaultLanguageId()
+  ): string {
     if (name[defaultLanguageId]) {
       return name[defaultLanguageId];
     }
     return this.getLocalizedValue(name);
   }
 
-  getLanguageId () {
+  getLanguageId (): string {
     return 'en-US';
   }
 
-  getDefaultLanguageId () {
+  getDefaultLanguageId (): string {
     return 'en-US';
   }
 
-  emptyState () {
+  emptyState (): void {
     cy.get('.taglib-empty-result-message').should('be.visible');
   }
 
-  getLocalizedConfig (config = {}, lang = this.getDefaultLanguageId()) {
+  getLocalizedConfig (config = {}, lang = this.getDefaultLanguageId()): any {
     const newConfigs = {
       ...config
     };
     Object.keys(config).forEach((key) => {
       const value = config[key];
       if (Array.isArray(value)) {
-        newConfigs[key] = value.map((localizedValue) => this.getLocalizedPrefenceValue(localizedValue, lang));
+        newConfigs[key] = value.map((localizedValue) =>
+          this.getLocalizedPrefenceValue(localizedValue, lang)
+        );
       } else if (typeof value === 'object') {
         newConfigs[key] = this.getLocalizedPrefenceValue(value, lang);
       }
@@ -85,7 +95,7 @@ export default class TestBase {
     return newConfigs;
   }
 
-  managementTitle (name) {
+  managementTitle (name: LocalizableValue): void {
     const defaultLanguageId = this.getDefaultLanguageId();
     const normalizeLang = (lang) => lang.replace('_', '-').toLowerCase();
     const selectLanguage = (lang, force = false) => {
@@ -117,9 +127,9 @@ export default class TestBase {
     }
   }
 
-  validateListView (name) {
+  validateListView (name: LocalizableValue): void {
     const localizedValue = this.getLocalizedPrefenceValue(name);
-    const fakeCompany = this.faker.company.companyName();
+    const fakeCompany = 'Liferay INC';
 
     cy.wait(this.defaultTime);
 
@@ -149,13 +159,13 @@ export default class TestBase {
     cy.get('@section').find('button').click({ force: true });
   }
 
-  chooseAnOption (value) {
+  chooseAnOption (value: string): void {
     cy.get('.dropdown-menu.show').within(() => {
       cy.get('button').contains(value).click();
     });
   }
 
-  getFakeValueByType (type) {
+  getFakeValueByType (type: string): string | number {
     switch (type) {
       case 'text': {
         return this.faker.system.fileName();

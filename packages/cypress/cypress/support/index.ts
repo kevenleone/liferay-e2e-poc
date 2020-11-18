@@ -15,10 +15,18 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+import 'cypress-xpath';
+
+import Portal from '../integration/portal';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`);
+});
+
+Cypress.Commands.add('login', (username, password) => {
+  const portal = new Portal();
+  portal.signIn(username, password);
 });

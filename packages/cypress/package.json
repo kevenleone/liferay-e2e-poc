@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "cypress": "^5.2.0",
-    "@4tw/cypress-drag-drop": "^1.4.0"
+    "@4tw/cypress-drag-drop": "^1.4.0",
+    "cypress": "^5.2.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/cypress open",
     "cypress:open": "./node_modules/.bin/cypress open",
     "cypress:run": "./node_modules/.bin/cypress run"
+  },
+  "devDependencies": {
+    "cypress-xpath": "^1.6.1"
   }
 }
