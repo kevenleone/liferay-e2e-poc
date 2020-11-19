@@ -33,17 +33,6 @@ export default class Entry extends TestBase {
     });
   }
 
-  public fillForm (): void {
-    this.config.formView.fieldTypes
-      .filter(({ config }) => config)
-      .forEach((fieldType) => {
-        const fieldName = this.getLocalizedValue(fieldType.config.label);
-        describe(`Should validate all fields of ${fieldName}`, () => {
-          this.validateEntry(fieldType, this.getLanguageId());
-        });
-      });
-  }
-
   public getFieldByLabel (fieldName: string): Cypress.Chainable {
     return cy.xpath(`//label[contains(text(), '${fieldName}')]`).parent();
   }
@@ -66,6 +55,73 @@ export default class Entry extends TestBase {
 
     cy.get('.dropdown-menu.show').within(() => {
       cy.get('button').first().click();
+    });
+  }
+
+  public entryCrud (): void {
+    const [
+      firstField,
+      {
+        config: { value: secondValue }
+      }
+    ] = this.config.formView.fieldTypes;
+
+    const {
+      config: { value: firstValue }
+    } = firstField;
+
+    this.config.formView.fieldTypes
+      .filter(({ config }) => config)
+      .forEach((fieldType) => {
+        const fieldName = this.getLocalizedValue(fieldType.config.label);
+        describe(`Should validate all fields of ${fieldName}`, () => {
+          this.validateEntry(fieldType, this.getLanguageId());
+        });
+      });
+
+    describe('Submit Entries', () => {
+      it('Should submit entry', () => {
+        this.submit();
+      });
+    });
+
+    describe('Should validate entry detail', () => {
+      it('Open first entry', () => {
+        this.openEntryDetail(0);
+      });
+
+      it('Validate Entry', () => {
+        this.getSpanByName(firstValue).should('exist');
+        this.getSpanByName(secondValue).should('exist');
+      });
+
+      it('Open Edit Screen', () => {
+        this.openEditPage();
+      });
+    });
+
+    describe('Should Edit Field', () => {
+      const newValue = `${firstField.config.value} v2`;
+      this.validateEntry({
+        ...firstField,
+        config: {
+          ...firstField.config,
+          value: newValue
+        }
+      });
+
+      it('Submit', () => {
+        this.submit();
+      });
+
+      it('Verify if value changed', () => {
+        this.getSpanByName(newValue).should('exist');
+      });
+
+      it('Back to List Entries', () => {
+        this.goBackApplicationBar();
+        this.getSpanByName(newValue).should('exist');
+      });
     });
   }
 
@@ -94,13 +150,7 @@ export default class Entry extends TestBase {
       });
     });
 
-    this.fillForm();
-
-    describe('Submit Entries', () => {
-      it('Should submit entry', () => {
-        this.submit();
-      });
-    });
+    this.entryCrud();
   }
 
   public submit (): void {
@@ -110,10 +160,7 @@ export default class Entry extends TestBase {
       .should('be.disabled');
   }
 
-  public validateEntry (
-    fieldType: any,
-    languageId?: string
-  ): void {
+  public validateEntry (fieldType: any, languageId?: string): void {
     const {
       help,
       label,

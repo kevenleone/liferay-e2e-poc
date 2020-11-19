@@ -15,8 +15,14 @@ class TestRunner {
   public Object: ObjectModule;
   public Entry: Entry
 
+  /**
+   *
+   * @param config Test script configuration
+   */
+
   constructor (config: Config) {
     this.defaultTime = 1000;
+
     this.App = new App(config);
     this.FormView = new FormView();
     this.TableView = new TableView(config);

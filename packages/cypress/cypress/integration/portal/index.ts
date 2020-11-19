@@ -38,6 +38,7 @@ export default class Portal extends TestBase {
       .type(password);
 
     cy.get(submitButton).click();
+    cy.wait(this.defaultTime / 2);
   }
 
   test (): void {

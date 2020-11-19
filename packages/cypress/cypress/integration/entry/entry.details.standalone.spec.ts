@@ -3,7 +3,7 @@ import TestRunner from '../utils/TestRunner';
 import { EntryDetailsConfig } from './fixtures';
 /// <reference path="../../support/index.d.ts" />
 
-class ViewEntryDetails extends TestRunner {
+class ViewEntryDetailsStandalone extends TestRunner {
   config: Config;
   selectors: any;
 
@@ -14,7 +14,7 @@ class ViewEntryDetails extends TestRunner {
   }
 
   run () {
-    describe('ViewEntryDetails', () => {
+    describe('ViewEntryDetailsStandalone', () => {
       before(() => {
         this.teardown();
         cy.login();
@@ -62,45 +62,12 @@ class ViewEntryDetails extends TestRunner {
       });
 
       describe('App Page', () => {
-        this.App.pipeline(false);
+        this.App.pipeline();
       });
 
-      describe('Application Page', () => {
-        after(() => {
-          this.Entry.deleteAllEntries();
-          this.Entry.emptyState();
-        });
-
-        describe('Should Open Application and Application', () => {
-          it('Go to home', () => {
-            this.Portal.visit();
-          });
-
-          it('Open Menu', () => {
-            this.Portal.openApplicationMenu();
-          });
-
-          it('Open Application Menu App', () => {
-            cy.xpath(
-              `//span[contains(text(), '${this.config.app.name['en-US']}')]`
-            ).click();
-          });
-        });
-
-        describe('Should validate HomeScreen', () => {
-          it('Should have empty state', () => {
-            this.Entry.emptyState();
-          });
-
-          it('Add Entry', () => {
-            this.Entry.addEntry();
-          });
-        });
-
-        this.Entry.entryCrud();
-      });
+      this.Entry.pipeline();
     });
   }
 }
 
-new ViewEntryDetails().run();
+new ViewEntryDetailsStandalone().run();

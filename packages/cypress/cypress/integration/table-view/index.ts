@@ -1,3 +1,4 @@
+import { LocalizableValue } from '../utils/interfaces';
 import TestBase from '../utils/TestBase';
 
 export default class TableView extends TestBase {
@@ -11,19 +12,20 @@ export default class TableView extends TestBase {
       closeSidebar: '.close-sidebar-btn',
       emptyDragzone: '.empty-drop-zone',
       newTableView: '.nav-item button.btn-primary',
-      openSidebar: '.open-sidebar-btn'
+      openSidebar: '.open-sidebar-btn',
+      saveButton: '.btn-primary'
     };
   }
 
-  visit () {
+  visit (): void {
     this.changeObjectTab(1);
   }
 
-  newTableView () {
+  newTableView (): void {
     cy.get(this.selectors.newTableView).click();
   }
 
-  setTitle (name) {
+  setTitle (name: LocalizableValue): void {
     this.managementTitle(name);
   }
 
@@ -35,12 +37,15 @@ export default class TableView extends TestBase {
     cy.get(this.selectors.openSidebar).click({ force: true });
   }
 
-  emptyDragzone () {
+  emptyDragzone (): void {
     cy.get(this.selectors.emptyDragzone).should('be.visible');
   }
 
   pipeline (): void {
-    const { formView: { fieldTypes }, tableView: { name } } = this.config;
+    const {
+      formView: { fieldTypes },
+      tableView: { name }
+    } = this.config;
 
     it('Open Add TableView', () => {
       this.visit();
@@ -64,15 +69,17 @@ export default class TableView extends TestBase {
     });
 
     it(`Should have ${fieldTypes.length} items on the list`, () => {
-      cy.get('.tab-content .field-type').should('have.length', fieldTypes.length);
+      cy.get('.tab-content .field-type').should(
+        'have.length',
+        fieldTypes.length
+      );
     });
 
     fieldTypes.forEach(({ config }) => {
       const { label } = this.getLocalizedConfig(config);
-      describe(`Should do action on [${label}] column created on FormView`, () => {
-        const findByLabel = () => cy.get('.list-group-title span').contains(label);
+      describe(`Should act on [${label}] column created on FormView`, () => {
         it(`Column [${label}] matches with the FormView item label`, () => {
-          findByLabel();
+          cy.get('.list-group-title span').contains(label);
         });
 
         it('Should search find matching value', () => {
@@ -81,7 +88,7 @@ export default class TableView extends TestBase {
             .type(label)
             .should('have.value', label)
             .as('input');
-          findByLabel();
+          cy.get('.list-group-title span').contains(label);
           cy.get('@input').clear();
         });
 
@@ -105,7 +112,7 @@ export default class TableView extends TestBase {
 
     describe('Save and validate the TableView', () => {
       it('Should save the Table View', () => {
-        cy.get('.btn-primary').click();
+        cy.get(this.selectors.saveButton).click();
       });
 
       xit('Validate ListView', () => {

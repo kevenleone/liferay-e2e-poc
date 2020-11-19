@@ -6,6 +6,12 @@ node_modules
 /.pnp
 .pnp.js
 
+packages/cypress/mochawesome*
+packages/cypress/cypress/results
+packages/cypress/cypress/screenshots
+packages/cypress/cypress/videos
+
+
 # testing
 **/**/coverage
 

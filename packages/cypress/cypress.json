@@ -1,13 +1,16 @@
 {
-    "viewportWidth": 1378,
-    "viewportHeight": 820,
-    "testFiles": "**/*.spec.ts",
-    "experimentalNetworkStubbing": true,
-    "reporter": "mochawesome",
-    "reporterOptions": {
-        "reportDir": "cypress/results",
-        "overwrite": false,
-        "html": false,
-        "json": true
-    }
+  "viewportWidth": 1378,
+  "viewportHeight": 820,
+  "testFiles": "**/*.spec.ts",
+  "retries": {
+    "openMode": 2
+  },
+  "experimentalNetworkStubbing": true,
+  "reporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": false,
+    "json": true
+  },
+  "projectId": "pxamjs"
 }

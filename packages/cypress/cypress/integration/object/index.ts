@@ -17,7 +17,10 @@ export default class ObjectModule {
   }
 
   visit (): void {
-    cy.visit(this.constants.objectUrl);
+    // cy.visit(this.constants.objectUrl);
+    cy.xpath(
+      '//span[contains(text(), \'Objects\')]'
+    ).click();
   }
 
   createAnObject (name: string, unCheck = false): void {

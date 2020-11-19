@@ -78,8 +78,8 @@ export default class TestBase {
   }
 
   public goBackApplicationBar (): void {
-    const { applicationMenuNav, iconLeftAngle } = this.constants;
-    cy.get(`${applicationMenuNav} ${iconLeftAngle}`).parent().click();
+    const { iconLeftAngle } = this.constants;
+    cy.get(iconLeftAngle).first().parent().click();
   }
 
   public selectLanguage (lang: string, force = false): void {
