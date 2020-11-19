@@ -13,7 +13,7 @@ const {
   simulator: simulatorConstant
 } = constants;
 
-describe('Open Liferay', () => {
+describe.skip('Open Liferay', () => {
   beforeEach(() => {
     constants.preserve();
   });

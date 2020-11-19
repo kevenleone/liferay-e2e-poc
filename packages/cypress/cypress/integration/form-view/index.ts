@@ -49,7 +49,7 @@ export default class FormView extends TestBase {
       .map((field, index) => {
         const isScrollDown = index >= 2;
         describe(`Should handle ${field.name} Field and Fill Values`, () => {
-          it(`Scroll ${isScrollDown ? 'Down' : 'Up'}`, () => {
+          xit(`Scroll ${isScrollDown ? 'Down' : 'Up'}`, () => {
             cy.scrollTo(isScrollDown ? 'bottom' : 'top');
           });
 

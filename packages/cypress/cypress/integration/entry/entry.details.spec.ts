@@ -1,6 +1,8 @@
 import { Config } from '../utils/interfaces';
 import TestRunner from '../utils/TestRunner';
 import { EntryDetailsConfig } from './fixtures';
+/// <reference path="../../support/index.d.ts" />
+
 class ViewEntryDetails extends TestRunner {
   config: Config;
   selectors: any;

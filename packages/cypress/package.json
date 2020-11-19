@@ -10,9 +10,13 @@
   "scripts": {
     "test": "./node_modules/.bin/cypress open",
     "cypress:open": "./node_modules/.bin/cypress open",
-    "cypress:run": "./node_modules/.bin/cypress run"
+    "cypress:run": "./node_modules/.bin/cypress run",
+    "report": "./node_modules/.bin/cypress run --reporter mochawesome \\ --reporter-options reportDir=reporter-config.json,overwrite=false,html=false,json=true"
   },
   "devDependencies": {
-    "cypress-xpath": "^1.6.1"
+    "cypress-xpath": "^1.6.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0"
   }
 }
