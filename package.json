@@ -9,6 +9,7 @@
     "format": "eslint packages/**/src/* --ext .js --fix",
     "test:cafe": "yarn workspace @monorepo/testcafe test",
     "test:cypress": "yarn workspace @monorepo/cypress test",
+    "test:cypress:verify": "yarn workspace @monorepo/cypress verify",
     "test:cypress:ci": "yarn workspace @monorepo/cypress cypress:chrome",
     "test:nightwatch": "yarn workspace @monorepo/nightwatch test",
     "test:playwright": "yarn workspace @monorepo/playwright test",

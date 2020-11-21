@@ -4,7 +4,7 @@ export const EntryDetailsConfig = {
   app: {
     config: { product: true, standalone: true, widget: false },
     name: {
-      'en-US': 'My Custom App'
+      'en-US': `My App ${faker.hacker.abbreviation()}`
     }
   },
   formView: {
@@ -35,7 +35,7 @@ export const EntryDetailsConfig = {
     ],
     name: { 'en-US': 'My Registration Form' }
   },
-  object: { name: 'My Custom Object' },
+  object: { name: `Liferay Object ${faker.hacker.abbreviation()}` },
   tableView: {
     name: {
       'en-US': 'My Registration Table'

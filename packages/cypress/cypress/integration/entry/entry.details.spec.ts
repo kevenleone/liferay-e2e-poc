@@ -17,22 +17,32 @@ class ViewEntryDetails extends TestRunner {
     describe('ViewEntryDetails', () => {
       before(() => {
         this.teardown();
-        cy.login();
+      });
+
+      after(() => {
+        this.Portal.openApplicationMenu();
+        this.Object.visit();
+        this.Object.deleteAllObjects();
       });
 
       beforeEach(() => {
         this.preserve();
       });
 
+      afterEach(() => {
+        cy.wait(this.defaultTime);
+      });
+
+      describe('Portal', () => {
+        it('Sign In', () => {
+          cy.login();
+        });
+      });
+
       describe('Object Page', () => {
         it('Visit App Builder Object', () => {
           this.Portal.openApplicationMenu();
-
           this.Object.visit();
-        });
-
-        it('Delete all existing Objects', () => {
-          this.Object.deleteAllObjects();
         });
 
         it('Create an Object', () => {

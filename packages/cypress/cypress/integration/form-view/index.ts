@@ -46,13 +46,8 @@ export default class FormView extends TestBase {
   ): void {
     fieldTypes
       .filter(({ type }) => type)
-      .map((field, index) => {
-        const isScrollDown = index >= 2;
+      .map((field) => {
         describe(`Should handle ${field.name} Field and Fill Values`, () => {
-          xit(`Scroll ${isScrollDown ? 'Down' : 'Up'}`, () => {
-            cy.scrollTo(isScrollDown ? 'bottom' : 'top');
-          });
-
           this.fieldCompose(field, {
             addField,
             doAction: true,

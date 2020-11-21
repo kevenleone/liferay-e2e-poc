@@ -8,7 +8,10 @@ class ViewEntryDetailsStandalone extends TestRunner {
   selectors: any;
 
   constructor () {
-    super(EntryDetailsConfig);
+    super({
+      ...EntryDetailsConfig,
+      app: { ...EntryDetailsConfig.app, config: { standalone: true } }
+    });
     this.config = EntryDetailsConfig;
     this.selectors = {};
   }
@@ -17,22 +20,26 @@ class ViewEntryDetailsStandalone extends TestRunner {
     describe('ViewEntryDetailsStandalone', () => {
       before(() => {
         this.teardown();
-        cy.login();
       });
 
       beforeEach(() => {
         this.preserve();
       });
 
+      afterEach(() => {
+        cy.wait(this.defaultTime);
+      });
+
+      describe('Portal', () => {
+        it('Sign In', () => {
+          cy.login();
+        });
+      });
+
       describe('Object Page', () => {
         it('Visit App Builder Object', () => {
           this.Portal.openApplicationMenu();
-
           this.Object.visit();
-        });
-
-        it('Delete all existing Objects', () => {
-          this.Object.deleteAllObjects();
         });
 
         it('Create an Object', () => {
@@ -62,10 +69,27 @@ class ViewEntryDetailsStandalone extends TestRunner {
       });
 
       describe('App Page', () => {
+        afterEach(() => {
+          cy.wait(this.defaultTime);
+        });
+
         this.App.pipeline();
       });
 
       this.Entry.pipeline();
+
+      describe('Cleanup', () => {
+        it('Visit App Builder Object', () => {
+          this.Portal.visit();
+          this.Portal.openApplicationMenu();
+          this.Object.visit();
+        });
+
+        it('Remove all objects', () => {
+          cy.wait(this.defaultTime);
+          this.Object.deleteAllObjects();
+        });
+      });
     });
   }
 }

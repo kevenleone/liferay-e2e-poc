@@ -5,19 +5,21 @@ export default class ObjectModule {
   constructor () {
     this.defaultTime = 1000;
     this.selectors = {
-      addObject: '.nav-item button.btn-primary',
+      addObject: '.btn-monospaced.btn-primary',
       popoverContinueCheck: 'input[type="checkbox"]',
       popoverNameInput: '#customObjectNameInput'
     };
   }
 
   visit (): void {
+    cy.wait(this.defaultTime * 3);
     cy.xpath(
       '//span[contains(text(), \'Objects\')]'
     ).click();
   }
 
   createAnObject (name: string, unCheck = false): void {
+    cy.wait(this.defaultTime * 2);
     const {
       addObject,
       popoverContinueCheck,
@@ -33,6 +35,8 @@ export default class ObjectModule {
         delay: 20
       });
     });
+
+    cy.wait(this.defaultTime * 2);
   }
 
   deleteAllObjects (): void {
