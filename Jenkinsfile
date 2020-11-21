@@ -2,16 +2,21 @@ pipeline {
   agent {
     // this image provides everything needed to run Cypress
     docker {
-      image 'cypress/base:10'
+      image 'cypress/browsers:node12.16.2-chrome81-ff75'
     }
   }
 
   stages {
-    stage('Prepare') {
-    	steps {
-				sh "npm install -g yarn"
-      	sh "yarn install"
-      }
+       stage('build') {
+        steps {
+          // there a few default environment variables on Jenkins
+          // on local Jenkins machine (assuming port 8080) see
+          // http://localhost:8080/pipeline-syntax/globals#env
+          echo "Running build ${env.BUILD_ID} on ${env.JENKINS_URL}"
+          sh 'npm install'
+          sh 'npm ci'
+          sh 'npm run cy:verify'
+        }
     }
       
     stage('build and test') {
@@ -31,8 +36,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'packages/cypress/cypress/videos*', fingerprint: true
-            archiveArtifacts artifacts: 'packages/cypress/cypress/screenshots*', fingerprint: true
+            archiveArtifacts artifacts:  "**/*.mp4", fingerprint: true
         }
     }
 }

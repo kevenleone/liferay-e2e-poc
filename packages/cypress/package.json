@@ -5,12 +5,13 @@
   "license": "MIT",
   "dependencies": {
     "@4tw/cypress-drag-drop": "^1.4.0",
-    "cypress": "5.6.0"
+    "cypress": "5.5.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/cypress open",
     "cypress:open": "./node_modules/.bin/cypress open",
     "cypress:run": "./node_modules/.bin/cypress run",
+    "cypress:chrome": "./node_modules/.bin/cypress run --browser chrome --headless",
     "cypress:record": "./node_modules/.bin/cypress run --record --key 8c031909-c110-40d1-a99d-d44cc959a7cb",
     "report": "./node_modules/.bin/cypress run --reporter mochawesome \\ --reporter-options reportDir=reporter-config.json,overwrite=false,html=false,json=true"
   },
