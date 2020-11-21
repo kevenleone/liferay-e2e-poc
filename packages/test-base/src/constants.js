@@ -1,21 +1,21 @@
-const portalURL = 'http://localhost:8080'
-const defaultLanguageId = 'en_US'
+const portalURL = 'http://10.0.0.103:8080';
+const defaultLanguageId = 'en_US';
 
 const languages = {
-  en_US: { key: 'en_US', value: 'English (United States' },
   ar_SA: { key: 'ar_SA', value: 'Arabic (Saudi Arabia)' },
   ca_ES: { key: 'ca_ES', value: 'Catalan (Spain)' },
-  zh_CN: { key: 'zh_CN', value: 'Chinese (China)' },
-  nl_NL: { key: 'nl_NL', value: 'Dutch (Netherlands)' },
+  de_DE: { key: 'de_DE', value: 'German (Germany)' },
+  en_US: { key: 'en_US', value: 'English (United States' },
+  es_ES: { key: 'es_ES', value: 'Spanish (Spain)' },
   fi_FI: { key: 'fi_FI', value: 'Finnish (Finland)' },
   fr_FR: { key: 'fr_FR', value: 'French (France)' },
-  de_DE: { key: 'de_DE', value: 'German (Germany)' },
   hu_HU: { key: 'hu_HU', value: 'Hungarian (Hungary)' },
   ja_JP: { key: 'ja_JP', value: 'Japanese (Japan)' },
+  nl_NL: { key: 'nl_NL', value: 'Dutch (Netherlands)' },
   pt_BR: { key: 'pt_BR', value: 'Portuguese (Brazil)' },
-  es_ES: { key: 'es_ES', value: 'Spanish (Spain)' },
-  sv_SE: { key: 'sv_SE', value: 'Swedish (Sweden)' }
-}
+  sv_SE: { key: 'sv_SE', value: 'Swedish (Sweden)' },
+  zh_CN: { key: 'zh_CN', value: 'Chinese (China)' }
+};
 
 module.exports = {
   buttons: [
@@ -45,11 +45,6 @@ module.exports = {
     welcome: 'Welcome to Liferay Community'
   },
   portalURL,
-  simulator: {
-    defaultValue: '600',
-    height: '768',
-    width: '1024'
-  },
   preserve: () => {
     Cypress.Cookies.defaults({
       preserve: [
@@ -61,6 +56,11 @@ module.exports = {
         'LFR_SESSION_STATE_20103',
         'COOKIE_SUPPORT'
       ]
-    })
+    });
+  },
+  simulator: {
+    defaultValue: '600',
+    height: '768',
+    width: '1024'
   }
-}
+};

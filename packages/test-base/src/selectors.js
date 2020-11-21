@@ -1,8 +1,8 @@
 module.exports = {
   accountSettingsLanguageSelect: '#_com_liferay_my_account_web_portlet_MyAccountPortlet_languageId',
   homePage: {
-    helloWorldContainer: '#fragment-0-qufk',
-    welcomeContainer: '#fragment-0-dngf'
+    helloWorldContainer: '#fragment-0-maqp',
+    welcomeContainer: '#fragment-0-btao'
   },
   login: {
     emailInput: '#_com_liferay_login_web_portlet_LoginPortlet_login',
@@ -19,4 +19,4 @@ module.exports = {
     width: '#_com_liferay_product_navigation_simulation_web_portlet_SimulationPortlet_width'
   },
   userAvatar: '.user-avatar-link'
-}
+};

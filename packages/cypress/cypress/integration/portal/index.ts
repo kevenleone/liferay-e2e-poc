@@ -21,7 +21,7 @@ export default class Portal extends TestBase {
   }
 
   visit (): void {
-    cy.visit('http://localhost:8080');
+    cy.visit('');
   }
 
   signIn (email = 'test@liferay.com', password = 'test'): void {

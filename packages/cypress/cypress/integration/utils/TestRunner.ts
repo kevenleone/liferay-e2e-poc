@@ -36,7 +36,7 @@ class TestRunner {
     Cypress.LocalStorage.clear();
     cy.clearCookies({ log: true });
     cy.clearLocalStorage({ log: true });
-    cy.visit('http://localhost:8080');
+    cy.visit('');
   }
 
   private keepCookies (cookies: Array<string>) {

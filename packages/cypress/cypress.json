@@ -2,10 +2,13 @@
   "viewportWidth": 1378,
   "viewportHeight": 820,
   "testFiles": "**/*.spec.ts",
+  "baseUrl": "http://192.168.0.100:8080",
+  "numTestsKeptInMemory": 1,
   "retries": {
     "openMode": 2
   },
   "experimentalNetworkStubbing": true,
+  "experimentalFetchPolyfill": true,
   "reporterOptions": {
     "reportDir": "cypress/results",
     "overwrite": false,

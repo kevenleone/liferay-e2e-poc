@@ -24,9 +24,15 @@ pipeline {
     //   }
 
       steps {
-        
-        sh "yarn test:cypress:ci"
+        sh "CYPRESS_BASE_URL=${params.CYPRESS_BASE_URL} yarn test:cypress:ci"
       }
     }
   }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'packages/cypress/cypress/videos*', fingerprint: true
+            archiveArtifacts artifacts: 'packages/cypress/cypress/screenshots*', fingerprint: true
+        }
+    }
 }

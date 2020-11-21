@@ -30,3 +30,12 @@ Cypress.Commands.add('login', (username, password) => {
   const portal = new Portal();
   portal.signIn(username, password);
 });
+
+Cypress.on('window:before:load', win => {
+  fetch('https://unpkg.com/unfetch/dist/unfetch.umd.js')
+    .then(stream => stream.text())
+    .then(response => {
+      win.eval(response);
+      win.fetch = win.unfetch;
+    });
+});
