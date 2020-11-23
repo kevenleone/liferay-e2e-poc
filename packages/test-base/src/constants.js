@@ -1,4 +1,4 @@
-const portalURL = 'http://10.0.0.103:8080';
+const portalURL = 'http://localhost:8080';
 const defaultLanguageId = 'en_US';
 
 const languages = {

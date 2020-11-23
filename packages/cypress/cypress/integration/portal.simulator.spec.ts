@@ -9,18 +9,17 @@ const {
 const {
   credentials: { email, password },
   portalHome,
-  portalURL,
   simulator: simulatorConstant
 } = constants;
 
-describe('Open Liferay', () => {
+describe('Liferay Portal', () => {
   beforeEach(() => {
     constants.preserve();
   });
 
-  it('Abrir o Liferay Portal', () => {
+  it('Open Portal', () => {
     const { helloWorldContainer, welcomeContainer } = homePage;
-    cy.visit(portalURL);
+    cy.visit('');
 
     cy.get(helloWorldContainer).contains(portalHome.helloWorld);
     cy.get(welcomeContainer).contains(portalHome.welcome);
@@ -28,7 +27,7 @@ describe('Open Liferay', () => {
     cy.get('#footer').contains(portalHome.footer);
   });
 
-  it('Fazer Login', () => {
+  it('SignIn', () => {
     cy.get(loginLink).click();
 
     cy.get(emailInput)
@@ -45,16 +44,16 @@ describe('Open Liferay', () => {
     cy.get(loginButton).should('be.enabled').click();
   });
 
-  it('Página de Bem Vindo (Usuário Logado)', () => {
+  it('Welcome Page (Logged user)', () => {
     cy.get(selectors.userAvatar).should('be.visible');
   });
 
-  describe('Simulações de tela', () => {
+  describe('Screen Simulations', () => {
     beforeEach(() => {
       cy.get('.product-menu.sidebar.sidebar-inverse').as('sidebar');
     });
 
-    it('Abrir simulador de telas', () => {
+    it('Open Screen Simulator', () => {
       cy.get('@sidebar').should('not.be.visible');
 
       cy.wait(100);
@@ -64,11 +63,11 @@ describe('Open Liferay', () => {
       cy.get('@sidebar').should('be.visible');
     });
 
-    it('Verificar se o item padrão é Desktop', () => {
+    it('Check if desktop is the default', () => {
       cy.get('.default-devices button.selected').contains('Desktop');
     });
 
-    it('Executar a simulação em diversos viewports', () => {
+    it('Run simulator in differents viewports', () => {
       cy.get('.default-devices button')
         .should('have.length', 5)
         .each((button, index) => {
@@ -88,7 +87,7 @@ describe('Open Liferay', () => {
         .type(simulatorConstant.width);
     });
 
-    it('Fechar Sidebar de Simulação', () => {
+    it('Close Simulation Sidebar', () => {
       cy.get('@sidebar').within(() => {
         cy.get(simulatorSelector.closeSimulator).click();
       });

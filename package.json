@@ -1,7 +1,7 @@
 {
   "name": "monorepo",
   "version": "1.0.0",
-  "repository": "https://github.com/kevenleone/monorepo.git",
+  "repository": "https://github.com/kevenleone/liferay-e2e-poc.git",
   "author": "Keven <keven.santos.sz@gmail.com>",
   "license": "MIT",
   "private": true,

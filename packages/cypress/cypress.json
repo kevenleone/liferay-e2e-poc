@@ -2,8 +2,7 @@
   "viewportWidth": 1378,
   "viewportHeight": 820,
   "testFiles": "**/*.spec.ts",
-  "baseUrl": "http://10.0.0.103:8080",
-  "numTestsKeptInMemory": 1,
+  "baseUrl": "http://localhost:8080",
   "retries": {
     "runMode": 1,
     "openMode": 2
