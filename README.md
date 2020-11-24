@@ -228,3 +228,44 @@ Nightwatch.js is an automated end-to-end testing framework for web applications 
 ⏱️ Test done after 4.72s without any wait
 
 ⚠️ Test passed without assertions
+
+# **Robot Framework**
+
+[Robot Framework](https://robotframework.org/)
+
+### **Browsers**
+
+- Firefox
+- Google Chrome
+- Edge
+- Safari
+- Opera
+- Android
+- Iphone
+- PhantomJS
+- HTMLUnit
+- HTMLUnit with Jasvascript
+
+### **Pros**
+
+- Great Documentation
+- Fast test execution
+- Simplified natural language
+- Integration with jenkins
+- Headless mode
+- Custom Reporters
+- HTTP Mock
+- Record Screenshots
+- Concurrent Test
+- Intellisense
+
+### **Cons**
+
+- Lack of experience with the framework
+- This high-level syntax may prevent us from controlling more low-level features
+
+### **Test result**
+
+⏱️ Test done after 4.5s
+
+✅ Test passed with assertions
