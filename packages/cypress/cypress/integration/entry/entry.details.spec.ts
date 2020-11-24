@@ -29,10 +29,6 @@ class ViewEntryDetails extends TestRunner {
         this.preserve();
       });
 
-      afterEach(() => {
-        cy.wait(this.defaultTime);
-      });
-
       describe('Portal', () => {
         it('Sign In', () => {
           cy.login();

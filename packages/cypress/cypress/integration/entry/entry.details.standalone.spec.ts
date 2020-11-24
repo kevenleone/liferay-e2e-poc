@@ -26,10 +26,6 @@ class ViewEntryDetailsStandalone extends TestRunner {
         this.preserve();
       });
 
-      afterEach(() => {
-        cy.wait(this.defaultTime);
-      });
-
       describe('Portal', () => {
         it('Sign In', () => {
           cy.login();
@@ -69,10 +65,6 @@ class ViewEntryDetailsStandalone extends TestRunner {
       });
 
       describe('App Page', () => {
-        afterEach(() => {
-          cy.wait(this.defaultTime);
-        });
-
         this.App.pipeline();
       });
 

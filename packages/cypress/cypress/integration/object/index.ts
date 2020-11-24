@@ -12,14 +12,12 @@ export default class ObjectModule {
   }
 
   visit (): void {
-    cy.wait(this.defaultTime * 3);
     cy.xpath(
       '//span[contains(text(), \'Objects\')]'
     ).click();
   }
 
   createAnObject (name: string, unCheck = false): void {
-    cy.wait(this.defaultTime * 2);
     const {
       addObject,
       popoverContinueCheck,
@@ -35,8 +33,6 @@ export default class ObjectModule {
         delay: 20
       });
     });
-
-    cy.wait(this.defaultTime * 2);
   }
 
   deleteAllObjects (): void {
