@@ -1,5 +1,11 @@
 # E2E frameworks analysis
 
+## Machine Specs
+- OS: MacOS Big sur
+- 16 GB 2667 MHz DDR4
+- 2,3 GHz 8-Core Intel Core i9
+- AMD Radeon Pro 5500M 4 GB
+
 ## Candidates
 
 - Test Café
